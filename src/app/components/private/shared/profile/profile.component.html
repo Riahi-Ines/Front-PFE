@@ -1,0 +1,275 @@
+<div id="body" class="bg-theme bg-theme1">
+    <!-- Start wrapper-->
+    <div id="wrapper">
+
+        <!--Start sidebar-wrapper-->
+        <app-sidebar></app-sidebar>
+        <!--End sidebar-wrapper-->
+
+        <!--Start topbar header-->
+        <app-topbar></app-topbar>
+        <!--End topbar header-->
+
+      
+<div class="clearfix"></div>
+	
+<div class="content-wrapper">
+  <div class="container-fluid">
+
+    <div class="row mt-3">
+        <div class="col-lg-4">
+            <div class="card " style=" height: 476px;">
+                <div class="card-body pt-5" style="margin-top: 50px;margin-left: 50px;">
+                    <img src="../../../../../assets/images/profile.png" alt="profile-image" class="profi">
+                </div>
+            </div>
+        </div>
+
+      <div class="col-lg-8">
+         <div class="card">
+          <div class="card-body">
+          <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
+              <li class="nav-item">
+                  <a href="javascript:void();" data-target="#profile" data-toggle="pill" class="nav-link active"><i class="icon-user"></i> <span class="hidden-xs">Profile</span></a>
+              </li>
+              <li class="nav-item">
+                  <a href="javascript:void();" data-target="#edit" data-toggle="pill" class="nav-link"><i class="icon-note"></i> <span class="hidden-xs">Edit</span></a>
+              </li>
+          </ul>
+          <div class="tab-content p-3">
+              <div class="tab-pane active" id="profile"style=" height: 327px;">
+                  <strong class="mb-3">User Profile</strong>
+                  <div class="row">
+                      <div class="col-md-12">
+                           <div class="table-responsive">
+                          <table class="table table-hover table-striped">
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <strong>Full Name</strong><strong></strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Last Name</strong><strong></strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>E-mail </strong> <strong></strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Service</strong> <strong></strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Function</strong> <strong></strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                          </table>
+                        </div>
+                      </div>
+                  </div>
+                  <!--/row-->
+              </div>
+           
+              <div class="tab-pane" id="edit">
+                <form [formGroup]="modifyForm" class="user" (ngSubmit)="modifyUser()">
+                    <div class="form-group row">
+                        <label for="exampleInputName"
+                            class="col-lg-3 col-form-label form-control-label">Full
+                            name</label>
+                        <div class="col-lg-9">
+                            <input type="text" id="exampleInputName"
+                                class="form-control form-control-user"
+                                placeholder="Enter Your First Name" formControlName="fullname">
+                            <div *ngIf="fullname.touched && fullname.invalid"
+                                class="text-danger bg-blue">
+                                <div *ngIf="fullname.errors.required">* Firstname is required
+                                </div>
+                                <div *ngIf="fullname.errors.minlength">* Firstname must contain
+                                    3 letters at least</div>
+                                <div *ngIf="fullname.errors.maxlength">* Firstname must contain
+                                    10 letters at least</div>
+                                <div *ngIf="fullname.errors.pattern">* Invalid format</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="exampleInputlastName"
+                            class="col-lg-3 col-form-label form-control-label">Last
+                            name</label>
+                        <div class="col-lg-9">
+                            <input type="text" id="exampleInputlastName"
+                                class="form-control form-control-user  input-shadow"
+                                placeholder="Enter Your Last Name" formControlName="lastname">
+                            <div *ngIf="lastname.touched && lastname.invalid"
+                                class="text-danger">
+                                <div *ngIf="lastname.errors.required">* lastname is required
+                                </div>
+                                <div *ngIf="lastname.errors.minlength">* lastname must contain 3
+                                    letters at least</div>
+                                <div *ngIf="lastname.errors.maxlength">* lastname must contain
+                                    20 letters at least </div>
+                                <div *ngIf="lastname.errors.pattern">* Invalid format</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="exampleInputEmailId"
+                            class="col-lg-3 col-form-label form-control-label">Email</label>
+                        <div class="col-lg-9">
+                            <input type="email" id="exampleInputEmailId"
+                                class="form-control  form-control-user"
+                                placeholder="Enter Your Email ID" formControlName="email"
+                                aria-describedby="emailHelp">
+                            <div *ngIf="email.touched && email.invalid" class="text-danger">
+                                <div *ngIf="email.errors.required">* Email is required</div>
+                                <div *ngIf="email.errors.email">*Invalid Format</div>
+                                <div *ngIf="email.errors.pattern">*example@asteelflash.com</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ExamplePhoto"
+                            class="col-lg-3 col-form-label form-control-label">Change
+                            profile</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="file" id="avatar" name="avatar"
+                                accept="image/png, image/jpeg" formControlName="photo">
+                            <div *ngIf="photo.touched && photo.invalid" class="text-danger">
+                                <div *ngIf="photo.errors.required">* Photo is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            class="col-lg-3 col-form-selectform-control-select">Service</label>
+                        <div class="col-lg-9">
+                            <select class="form-control form-control-sm"
+                                formControlName="service">
+                                <option value="" disabled selected hidden></option>
+                                <option>Production</option>
+                                <option>Maintenance</option>
+                                <option>Qualité</option>
+                                <option>Lean</option>
+                            </select>
+                            <div *ngIf="service.touched && service.invalid" class="text-danger">
+                                <div *ngIf="service.errors.required">* Service is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="exampleInputfunction"
+                            class="col-lg-3 col-form-selectform-control-select">Function</label>
+                        <div class="col-lg-9">
+                            <select class="form-control form-control-sm"
+                                formControlName="function">
+                                <option value="" disabled selected hidden></option>
+                                <option>Directeur</option>
+                                <option>Responsable</option>
+                                <option>Ingénieur</option>
+                                <option>Technicien</option>
+                            </select>
+                            <div *ngIf="function.touched && function.invalid"
+                                class="text-danger">
+                                <div *ngIf="function.errors.required">* Function is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="exampleInputPassword"
+                            class="col-lg-3 col-form-label form-control-label">Password</label>
+                        <div class="col-lg-9">
+                            <input input [type]="show ? 'text' : 'password'"
+                                id="exampleInputPassword"
+                                class="form-control  form-control-user"
+                                placeholder="Choose Password" formControlName="password">
+                            <div *ngIf="password.touched && password.invalid"
+                                class="text-danger">
+                                <div *ngIf="password.errors.required">* Password is required
+                                </div>
+                                <div *ngIf="password.errors.minlength">* Password must contain 8
+                                    characters at least</div>
+                                <div *ngIf="password.errors.maxlength">* Password must contain
+                                    12 characters at least </div>
+                                <div *ngIf="password.errors.pattern">*Password must start only
+                                    with number or letter and has at least one alphabet,one
+                                    number,and one special </div>
+                            </div>
+                            <div class="form-control-position">
+                                <a (click)="showpassword()"><i class="icon-lock"
+                                        style="color:white;"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="exampleInputPassword2"
+                            class="col-lg-3 col-form-label form-control-label">Confirm
+                            password</label>
+                        <div class="col-lg-9">
+                            <input [type]="show2 ? 'text' : 'password'"
+                                id="exampleInputPassword2" class="form-control input-shadow"
+                                placeholder="Confirm Password" formControlName="repassword">
+                            <div *ngIf="repassword.touched && repassword.invalid">
+                                <div *ngIf="repassword.errors.required" class="text-danger">
+                                    Repeat Password is required<br></div>
+                            </div>
+                            <div *ngIf="repassword.valid && repassword.value != password.value"
+                                class="text-danger">
+                                The passwords entered do not match
+                            </div>
+                            <div class="form-control-position">
+                                <a (click)="showpassword2()"><i class="icon-lock"
+                                        style="color:white;"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label"></label>
+                        <div class="col-lg-9">
+                            <input type="reset" class="btn btn-danger" value="Cancel">
+                            <input type="submit" [disabled]="modifyForm.invalid"
+                                class="btn btn-info" value="Save Changes">
+                        </div>
+                    </div>
+                </form>
+              </div>
+          </div>
+      </div>
+    </div>
+    </div>
+      
+  </div>
+
+  <!--start overlay-->
+        <div class="overlay toggle-menu"></div>
+      <!--end overlay-->
+  
+  </div>
+  <!-- End container-fluid-->
+ </div><!--End content-wrapper-->
+        <!--Start Back To Top Button-->
+        <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+        <!--End Back To Top Button-->
+
+        <!--Start footer-->
+        <app-footer></app-footer>
+        <!--End footer-->
+
+        <!--start color switcher-->
+        <app-rightside></app-rightside>
+        <!--end color switcher-->
+
+    </div>
+    <!--End wrapper-->
+
+</div>

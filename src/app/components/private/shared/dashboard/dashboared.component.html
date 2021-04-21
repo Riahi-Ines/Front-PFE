@@ -1,0 +1,635 @@
+<div id="body" class="bg-theme bg-theme1">
+    <!-- start loader -->
+    <div id="pageloader-overlay" class="visible incoming">
+        <div class="loader-wrapper-outer">
+            <div class="loader-wrapper-inner">
+                <div class="loader"></div>
+            </div>
+        </div>
+    </div>
+    <!-- end loader -->
+    <!-- Start wrapper-->
+    <div id="wrapper">
+        <app-sidebar></app-sidebar>
+        <app-topbar></app-topbar>
+        <div class="clearfix"></div>
+
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <!--Start Dashboard Content-->
+                <div id="wrapper">
+                    <!-- Content Wrapper -->
+                    <div id="content-wrapper" class="d-flex flex-column">
+                        <!-- Main Content -->
+                        <div id="content">
+                            <!-- Begin Page Content -->
+                            <div class="container-fluid">
+                                <!-- Page Heading -->
+                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                    <div class="group mg-2 animate-enter-right">
+                                        <input id="current_dateandtime">
+                                    </div>
+                                    <a (click)="print()" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"
+                                        style="color:white"> Generate
+                                        Report</a>
+                                </div>
+                                <!-- Content Row -->
+                                <div class="row">
+                                    <!-- FPY ABB CLIENT -->
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card border-left-danger shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-uppercase mb-1">
+                                                            FPY ABB
+                                                        </div>
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col-auto">
+                                                                <div
+                                                                    class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="progress progress-sm mr-2">
+                                                                    <div class="progress-bar bg-danger"
+                                                                        role="progressbar">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- FPY HAGER CLIENT -->
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card border-left-primary shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold  text-uppercase mb-1">
+                                                            FPY HAGER
+                                                        </div>
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col-auto">
+                                                                <div
+                                                                    class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="progress progress-sm mr-2">
+                                                                    <div class="progress-bar bg-primary"
+                                                                        role="progressbar">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- FPY MULLER CLIENT -->
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card border-left-secondary shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold  text-uppercase mb-1">
+                                                            FPY
+                                                            MULLER
+                                                        </div>
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col-auto">
+                                                                <div
+                                                                    class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="progress progress-sm mr-2">
+                                                                    <div class="progress-bar bg-secondary"
+                                                                        role="progressbar">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- FPY FRESNUIS CLIENT -->
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card border-left-info shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-uppercase mb-1">
+                                                            FPY FRESNUIS
+                                                        </div>
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col-auto">
+                                                                <div
+                                                                    class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="progress progress-sm mr-2">
+                                                                    <div class="progress-bar bg-info"
+                                                                        role="progressbar">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- FPY SOMFY CLIENT -->
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card border-left-warning shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold  text-uppercase mb-1">
+                                                            FPY SOMFY
+                                                        </div>
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col-auto">
+                                                                <div
+                                                                    class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="progress progress-sm mr-2">
+                                                                    <div class="progress-bar bg-warning"
+                                                                        role="progressbar">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- FPY BRANDT CLIENT -->
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card border-left-danger shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold  text-uppercase mb-1">
+                                                            FPY BRANDT
+                                                        </div>
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col-auto">
+                                                                <div
+                                                                    class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="progress progress-sm mr-2">
+                                                                    <div class="progress-bar bg-danger"
+                                                                        role="progressbar">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- FPY BRANDT CLIENT -->
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card border-left-success shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold  text-uppercase mb-1">
+                                                            FPY BSH </div>
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col-auto">
+                                                                <div
+                                                                    class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="progress progress-sm mr-2">
+                                                                    <div class="progress-bar bg-success "
+                                                                        role="progressbar">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- FPY BRANDT CLIENT -->
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card border-left-success shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold  text-uppercase mb-1">
+                                                            FPY SAGEM
+                                                        </div>
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col-auto">
+                                                                <div
+                                                                    class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="progress progress-sm mr-2">
+                                                                    <div class="progress-bar bg-success "
+                                                                        role="progressbar">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Total FPY -->
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card border-left-success shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold  text-uppercase mb-1">
+                                                            Total FPY
+                                                        </div>
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col-auto">
+                                                                <div
+                                                                    class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="progress progress-sm mr-2">
+                                                                    <div class="progress-bar bg-success "
+                                                                        role="progressbar">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Total Products -->
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card border-left-success shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold  text-uppercase mb-1">
+                                                            Total Products
+                                                        </div>
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col-auto">
+                                                                <div
+                                                                    class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="progress progress-sm mr-2">
+                                                                    <div class="progress-bar bg-success "
+                                                                        role="progressbar">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <!-- Good Products -->
+                                     <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card border-left-success shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold  text-uppercase mb-1">
+                                                          Good Products
+                                                        </div>
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col-auto">
+                                                                <div
+                                                                    class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="progress progress-sm mr-2">
+                                                                    <div class="progress-bar bg-success "
+                                                                        role="progressbar">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <!-- Good Products passed on the first try-->
+                                     <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card border-left-success shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold  text-uppercase mb-1">
+                                                          Good Products passed on the first try
+                                                        </div>
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col-auto">
+                                                                <div
+                                                                    class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="progress progress-sm mr-2">
+                                                                    <div class="progress-bar bg-success "
+                                                                        role="progressbar">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Content Column -->
+
+                                <!-- TOP 5 DEF -->
+                                <div class="row">
+
+                                    <!-- Content Column -->
+                                    <div class="col-lg-6 mb-4">
+                                        <!-- Project Card Example -->
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold" style="font-size:16px;">TOP 5 Defects
+                                                </h6>
+                                            </div>
+                                            <div class="card-body" style="height:245px;">
+                                                <h4 class="small font-weight-bold"><span class="float-right"></span>
+                                                </h4>
+                                                <div class="progress mb-4">
+                                                    <div class="progress-bar bg-danger" role="progressbar"></div>
+                                                </div>
+                                                <h4 class="small font-weight-bold"><span class="float-right"></span>
+                                                </h4>
+                                                <div class="progress mb-4">
+                                                    <div class="progress-bar bg-warning" role="progressbar"></div>
+                                                </div>
+                                                <h4 class="small font-weight-bold"> <span class="float-right"></span>
+                                                </h4>
+                                                <div class="progress mb-4">
+                                                    <div class="progress-bar" role="progressbar"></div>
+                                                </div>
+                                                <h4 class="small font-weight-bold"> <span class="float-right"></span>
+                                                </h4>
+                                                <div class="progress mb-4">
+                                                    <div class="progress-bar bg-info" role="progressbar"></div>
+                                                </div>
+                                                <h4 class="small font-weight-bold"><span class="float-right"></span>
+                                                </h4>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-success" role="progressbar"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="card shadow ">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold " style="font-size:16px;">Defects List
+                                                </h6>
+                                                <div class="wrap">
+                                                    <div class="search">
+                                                        <input type="text" class="searchTerm" placeholder="Search">
+                                                        <button type="submit" class="searchButton">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Defects</th>
+                                                            <th>Quantity</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th></th>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th></th>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th></th>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th></th>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th></th>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th></th>
+
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                </div>
+                                <!-- Content evo + camb -->
+                                <div class="row">
+
+                                    <!-- evolution horaire -->
+                                    <div class="col-xl-8 col-lg-7">
+                                        <div class="card shadow mb-4">
+                                            <!-- Card Header - Dropdown -->
+                                            <div
+                                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                                <h6 class="m-0 font-weight-bold" style="font-size:16px;">Evolution
+                                                    horaire defauts
+                                                </h6>
+
+                                            </div>
+                                            <!-- Card Body -->
+                                            <div class="card-body" style="height:269px;">
+                                                <div class="chart-area">
+                                                    <canvas id="myAreaChart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Pie Chart -->
+                                    <div class="col-xl-4 col-lg-5">
+                                        <div class="card shadow mb-4">
+                                            <!-- Card Header - Dropdown -->
+                                            <div
+                                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                                <h6 class="m-0 font-weight-bold " style="font-size:16px;">camember
+                                                    defauts</h6>
+
+                                            </div>
+                                            <!-- Card Body -->
+                                            <div class="card-body">
+                                                <div class="chart-pie pt-4 pb-2">
+                                                    <canvas id="myPieChart"></canvas>
+                                                </div>
+                                                <div class="mt-4 text-center small">
+                                                    <span class="mr-2">
+                                                        <i class="fas fa-circle text-primary"></i>
+                                                    </span>
+                                                    <span class="mr-2">
+                                                        <i class="fas fa-circle text-success"></i>
+                                                    </span>
+                                                    <span class="mr-2">
+                                                        <i class="fas fa-circle text-info"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Content Row -->
+                                <div class="row">
+
+
+                                    <!-- Area Chart -->
+                                    <div class="col-xl-8 col-lg-7">
+                                        <div class="card shadow mb-4" style="width: 1020px;">
+                                            <!-- Card Header - Dropdown -->
+                                            <div
+                                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                                <h6 class="m-0 font-weight-bold " style="font-size:16px;">evolution
+                                                    horaire defauts
+                                                </h6>
+
+                                            </div>
+                                            <!-- Card Body -->
+                                            <div class="card-body" style="height:300px;">
+                                                <div class="chart-area">
+                                                    <canvas id="myAreaChart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- End of Main Content -->
+                        </div>
+                        <!-- End of Content Wrapper -->
+
+                    </div>
+                    <!-- End of Page Wrapper -->
+                </div>
+
+                <!--End Dashboard Content-->
+
+                <!--start overlay-->
+                <div class="overlay toggle-menu"></div>
+                <!--end overlay-->
+
+            </div>
+            <!-- End container-fluid-->
+
+        </div>
+        <!--End content-wrapper-->
+        <!--Start Back To Top Button-->
+        <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+        <!--End Back To Top Button-->
+
+        <!--Start footer-->
+        <app-footer></app-footer>
+        <!--End footer-->
+
+        <!--start color switcher-->
+        <app-rightside></app-rightside>
+        <!--end color switcher-->
+
+    </div>
+    <!--End wrapper-->
+</div>

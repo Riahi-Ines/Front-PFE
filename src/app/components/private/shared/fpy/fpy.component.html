@@ -1,0 +1,145 @@
+<div id="body" class="bg-theme bg-theme1">
+
+    <!-- Start wrapper-->
+    <div id="wrapper">
+
+        <!--Start sidebar-wrapper-->
+        <app-sidebar></app-sidebar>
+        <!--End sidebar-wrapper-->
+
+        <!--Start topbar header-->
+        <app-topbar></app-topbar>
+        <!--End topbar header-->
+
+        <div class="clearfix"></div>
+
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <!--Start FPY Content-->
+                <form>
+                    <div class="col-xl-12 col-lg-7">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>
+                                        <div class="position-relative has-icon-right">
+                                            <input id="date" [readonly]="true" placeholder="Put a range DateTime "
+                                                [owlDateTimeTrigger]="dt10" [owlDateTime]="dt10" [selectMode]="'range'">
+                                            <owl-date-time #dt10></owl-date-time>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col">
+                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"style="margin-left:210px;height:30px"> Generate
+                                Report</a>
+                        </div></div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputclient" class="sr-only">Client</label>
+                                    <div class="position-relative has-icon-right">
+                                        <select class="form-control form-control-rounded">
+                                            <option value="" disabled selected hidden>Choose a Client</option>
+                                            <option>Hager Client</option>
+                                            <option>ABB Client</option>
+                                            <option>SOMFY Client</option>
+                                            <option>BRANDT Client</option>
+                                            <option>FRESNUIS Client</option>
+                                            <option>MULLER Client</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputline" class="sr-only">Line</label>
+                                    <div class="position-relative has-icon-right">
+                                        <select class="form-control form-control-rounded">
+                                            <option value="" disabled selected hidden>Choose a production line</option>
+                                            <option>Line 1</option>
+                                            <option>Line 2</option>
+                                            <option>Line 3</option>
+                                            <option>Line 4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputprod" class="sr-only">Product</label>
+                                    <div class="position-relative has-icon-right">
+                                        <select class="form-control form-control-rounded">
+                                            <option value="" disabled selected hidden>Choose a Product</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </form>
+                <div class="col-xl-12 col-lg-7">
+                    <div class="card shadow mb-4"id="fpy">
+                        <!-- Card Header - Dropdown -->
+                      
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <div class="card-body">
+                                <div class="card-header">
+                                    <h6 class="m-0">First Pass Yield Percent
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-7">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold " style="font-size:16px;">First Pass Yield Evolution
+                            </h6>
+
+                        </div>
+                        <!-- Card Body -->
+                        <div class="card-body" style="height:300px;">
+                            <div class="chart-area">
+                                <canvas id="myAreaChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--End FPY Content-->
+                <!--start overlay-->
+                <div class="overlay toggle-menu"></div>
+                <!--end overlay-->
+
+            </div>
+            <!-- End container-fluid-->
+
+        </div>
+        <!--End content-wrapper-->
+        <!--Start Back To Top Button-->
+        <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+        <!--End Back To Top Button-->
+
+        <!--Start footer-->
+        <app-footer></app-footer>
+        <!--End footer-->
+
+        <!--start color switcher-->
+        <app-rightside></app-rightside>
+        <!--end color switcher-->
+
+    </div>
+    <!--End wrapper-->
+
+
+
+</div>

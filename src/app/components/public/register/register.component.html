@@ -1,0 +1,193 @@
+<div id="body" class="bg-theme bg-theme1">
+	<!-- start loader -->
+	<div id="pageloader-overlay" class="visible incoming">
+		<div class="loader-wrapper-outer">
+			<div class="loader-wrapper-inner">
+				<div class="loader"></div>
+			</div>
+		</div>
+	</div>
+	<!-- end loader -->
+	<!-- Start wrapper-->
+	<div id="wrapper">
+		<div class="card card-authentication2 mx-auto my-3">
+			<div class="card-body">
+				<div class="card-content p-2">
+					<div class="text-center">
+						<img src="assets/images/logo-icon.png" style="height: 70px;width: 70px;">
+					</div>
+					<div class="card-title text-uppercase text-center py-3">Sign Up</div>
+					<form [formGroup]="registerForm" class="user" (ngSubmit)="registerUser()">
+						<div class="row mb-3">
+							<div class="col">
+								<div class="form-group">
+									<label for="exampleInputName" class="sr-only">First Name</label>
+									<div class="position-relative has-icon-right">
+										<input type="text" id="exampleInputName" class="form-control form-control-user"
+											placeholder="Enter Your First Name" formControlName="fullname">
+										<div *ngIf="fullname.touched && fullname.invalid" class="text-danger bg-blue">
+											<div *ngIf="fullname.errors.required">* Firstname is required</div>
+											<div *ngIf="fullname.errors.minlength">* Firstname must contain 3 letters at least</div>
+											<div *ngIf="fullname.errors.maxlength">* Firstname must contain 10 letters at least</div>
+											<div *ngIf="fullname.errors.pattern">* Invalid format</div>
+										</div>
+										<div class="form-control-position">
+											<i class="icon-user" style="color:white;"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="form-group">
+									<label class="sr-only">Service</label>
+									<div class="position-relative has-icon-right">
+										<select class="form-control form-control-user"formControlName="service">
+											<option value="" disabled selected hidden>Choose a Service</option>
+											<option>Production</option>
+											<option>Maintenance</option>
+											<option>Qualité</option>
+											<option>Lean</option>
+										</select>
+										<div *ngIf="service.touched && service.invalid" class="text-danger">
+											<div *ngIf="service.errors.required">* Service is required</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col">
+								<div class="form-group">
+									<label for="exampleInputlastName" class="sr-only">Last Name</label>
+									<div class="position-relative has-icon-right">
+										<input type="text" id="exampleInputlastName" class="form-control form-control-user  input-shadow"
+											placeholder="Enter Your Last Name"formControlName="lastname">
+											<div *ngIf="lastname.touched && lastname.invalid" class="text-danger">
+												<div *ngIf="lastname.errors.required">* lastname is required</div>
+												<div *ngIf="lastname.errors.minlength">* lastname must contain 3 letters at least</div>
+												<div *ngIf="lastname.errors.maxlength">* lastname must contain 20 letters at least </div>
+												<div *ngIf="lastname.errors.pattern">* Invalid format</div>
+											</div>
+										<div class="form-control-position">
+											<i class="icon-user" style="color:white;"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="form-group">
+									<label for="exampleInputfunction" class="sr-only">Function</label>
+									<div class="position-relative has-icon-right">
+										<select class="form-control form-control-user"formControlName="function">
+											<option value="" disabled selected hidden>Choose a Function</option>
+											<option>Directeur</option>
+											<option>Responsable</option>
+											<option>Ingénieur</option>
+											<option>Technicien</option>
+										</select>
+										<div *ngIf="function.touched && function.invalid" class="text-danger">
+											<div *ngIf="function.errors.required">* Function is required</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col">
+								<div class="form-group">
+									<label for="exampleInputEmailId" class="sr-only">Email ID</label>
+									<div class="position-relative has-icon-right">
+										<input type="text" id="exampleInputEmailId" class="form-control  form-control-user"
+											placeholder="Enter Your Email ID"formControlName="email"aria-describedby="emailHelp">
+											<div *ngIf="email.touched && email.invalid" class="text-danger">
+												<div *ngIf="email.errors.required">* Email is required</div>
+												<div *ngIf="email.errors.email">*Invalid Format</div>
+												<div *ngIf="email.errors.pattern">*example@asteelflash.com</div>
+											</div>
+										<div class="form-control-position">
+											<i class="icon-envelope-open" style="color:white;"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="form-group">
+									<label for="exampleInputPassword" class="sr-only">Password</label>
+									<div class="position-relative has-icon-right">
+										<input input [type]="show ? 'text' : 'password'"  id="exampleInputPassword"
+											class="form-control  form-control-user" placeholder="Choose Password" formControlName="password">
+											<div *ngIf="password.touched && password.invalid" class="text-danger">
+												<div *ngIf="password.errors.required">* Password is required</div>
+												<div *ngIf="password.errors.minlength">* Password must contain 8 characters at least</div>
+												<div *ngIf="password.errors.maxlength">* Password must contain 12 characters at least </div>
+												<div *ngIf="password.errors.pattern">*Password must start only with number or letter and has at least one alphabet,one number,and one special </div>
+											</div>
+										<div class="form-control-position">
+											<a (click)="showpassword()"><i class="icon-lock" style="color:white;"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col">
+								<div class="form-group">
+									<label for="ExamplePhoto" class="sr-only">Image</label>
+									<div class="position-relative has-icon-right">
+										<input class="form-control" type="file" id="ExamplePhoto" name="avatar"
+											accept="image/png, image/jpeg"formControlName="photo">
+											<div *ngIf="photo.touched && photo.invalid" class="text-danger">
+												<div *ngIf="photo.errors.required">* Photo is required</div>
+											</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="form-group">
+									<label for="exampleInputPassword2" class="sr-only">Repassword</label>
+									<div class="position-relative has-icon-right">
+										<input [type]="show2 ? 'text' : 'password'" id="exampleInputPassword2"
+											class="form-control input-shadow" placeholder="Confirm Password"formControlName="repassword">
+											<div *ngIf="repassword.touched && repassword.invalid">
+												<div *ngIf="repassword.errors.required" class="text-danger">Repeat Password is required<br></div>
+											</div>
+											<div *ngIf="repassword.valid && repassword.value != password.value" class="text-danger">
+												The passwords entered do not match
+											</div>
+										<div class="form-control-position">
+											<a (click)= "showpassword2()"><i class="icon-lock" style="color:white;"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group text-center">
+							<div class="icheck-material-white">
+								<input class="form-control" type="checkbox" id="user-checkbox" required checked=""formControlName="chek"/>
+								<label for="user-checkbox">I Agree With Terms & Conditions</label>
+								<div *ngIf="chek.touched && chek.invalid" class="text-danger">
+									<div *ngIf="chek.errors.required">*Accept Ts & Cs is required</div>
+								</div>
+							</div>
+						</div>
+						<button type="submit"  [disabled]="registerForm.invalid" class="btn btn-light btn-block waves-effect waves-light"
+							style="width: 200px;margin-left: 300px;" routerLink="/dashboard">Sign Up</button>
+					</form>
+				</div>
+			</div>
+			<div class="card-footer text-center py-3">
+				<p class="text-warning mb-0">Already have an account? <a routerLink="/login"> Sign In here</a></p>
+			</div>
+		</div>
+
+		<!--Start Back To Top Button-->
+		<a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+		<!--End Back To Top Button-->
+
+		<!--start color switcher-->
+		<app-rightside></app-rightside>
+		<!--end color switcher-->
+
+	</div>
+	<!--wrapper-->
+</div>

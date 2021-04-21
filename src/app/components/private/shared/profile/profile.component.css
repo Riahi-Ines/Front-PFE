@@ -1,0 +1,13 @@
+.profi{
+    overflow:hidden;
+    -webkit-border-radius:160px;
+    -moz-border-radius:160px;
+    border-radius:160px;
+    width:200px;
+    height:200px;
+    -moz-box-shadow: 0px 0px 10px #ffffff;
+	-webkit-box-shadow: 0px 0px 10px #ffffff;
+	-o-box-shadow: 0px 0px 10px #ffffff;
+	box-shadow: 0px 0px 10px #ffffff;
+}
+

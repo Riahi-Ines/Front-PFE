@@ -1,0 +1,303 @@
+<div id="body" class="bg-theme bg-theme1">
+
+    <!-- Start wrapper-->
+    <div id="wrapper">
+
+        <!--Start sidebar-wrapper-->
+        <app-sidebar></app-sidebar>
+        <!--End sidebar-wrapper-->
+
+        <!--Start topbar header-->
+        <app-topbar></app-topbar>
+        <!--End topbar header-->
+
+        <div class="clearfix"></div>
+
+        <div class="content-wrapper">
+            <div class="container-fluid">
+
+                <!--Start FPY Content-->
+                <form>
+                    <div class="col-xl-12 ">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>
+                                        <div class="position-relative has-icon-right">
+                                            <input id="date" [readonly]="true" placeholder="Put a range DateTime "
+                                                [owlDateTimeTrigger]="dt10" [owlDateTime]="dt10" [selectMode]="'range'">
+                                            <owl-date-time #dt10></owl-date-time>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputName" class="sr-only">Function</label>
+                                    <div class="position-relative has-icon-right">
+                                        <select class="form-control form-control-rounded">
+                                            <option value="" disabled selected hidden>Choose a Function</option>
+                                            <option>Directeur</option>
+                                            <option>Responsable</option>
+                                            <option>Ingénieur</option>
+                                            <option>Technicien</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputName" class="sr-only">Function</label>
+                                    <div class="position-relative has-icon-right">
+                                        <select class="form-control form-control-rounded">
+                                            <option value="" disabled selected hidden>Choose a Function</option>
+                                            <option>Directeur</option>
+                                            <option>Responsable</option>
+                                            <option>Ingénieur</option>
+                                            <option>Technicien</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputName" class="sr-only">Machine</label>
+                                    <div class="position-relative has-icon-right">
+                                        <select class="form-control form-control-rounded">
+                                            <option value="" disabled selected hidden>Choose Machine</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputName" class="sr-only">Service</label>
+                                    <div class="position-relative has-icon-right">
+                                        <select class="form-control form-control-rounded" id="rowcent">
+                                            <option value="" disabled selected hidden>Choose a Service</option>
+                                            <option>Production</option>
+                                            <option>Maintenance</option>
+                                            <option>Qualité</option>
+                                            <option>Lean</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputName" class="sr-only">Function</label>
+                                    <div class="position-relative has-icon-right">
+                                        <select class="form-control form-control-rounded" id="colcent">
+                                            <option value="" disabled selected hidden>Choose a Function</option>
+                                            <option>Directeur</option>
+                                            <option>Responsable</option>
+                                            <option>Ingénieur</option>
+                                            <option>Technicien</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+                <div class="col-xl-12 col-lg-7">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <!-- Project Card Example -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold" style="font-size:16px;">TOP 5 Defects</h6>
+                                </div>
+                                <div class="card-body" style="height:270px;">
+                                    <h4 class="small font-weight-bold"><span class="float-right"></span>
+                                    </h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-danger" role="progressbar"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold"><span class="float-right"></span>
+                                    </h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-warning" role="progressbar"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold"> <span class="float-right"></span>
+                                    </h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar" role="progressbar"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold"> <span class="float-right"></span>
+                                    </h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-info" role="progressbar"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold"><span class="float-right"></span>
+                                    </h4>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div>
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold " style="font-size:16px;">camember defauts</h6>
+
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4 pb-2">
+                                            <canvas id="myPieChart"></canvas>
+                                        </div>
+                                        <div class="mt-4 text-center small">
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-primary"></i>
+                                            </span>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-success"></i>
+                                            </span>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-info"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xl-12 col-lg-7">
+                    <div class="row ">
+                        <div class="col-lg-6">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-7">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold " style="font-size:16px;">Defects Evolution
+                            </h6>
+
+                        </div>
+                        <!-- Card Body -->
+                        <div class="card-body" style="height:300px;">
+                            <div class="chart-area">
+                                <canvas id="myAreaChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-7">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">Defects List</h5>
+                            <div class="table-responsive table-hover">
+                             <table class="table table-sm">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Defects</th>
+                                  <th scope="col">Quantity</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">1</th>
+                                  <td>Mark</td>
+                                  <td>Otto</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">6</th>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">7</th>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">8</th>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">9</th>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">10</th>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                               
+                              </tbody>
+                            </table>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                </div></div>
+                <!--End FPY Content-->
+                <!--start overlay-->
+                <div class="overlay toggle-menu"></div>
+                <!--end overlay-->
+
+            </div>
+            <!-- End container-fluid-->
+
+        </div>
+        <!--End content-wrapper-->
+        <!--Start Back To Top Button-->
+        <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+        <!--End Back To Top Button-->
+
+        <!--Start footer-->
+        <app-footer></app-footer>
+        <!--End footer-->
+
+        <!--start color switcher-->
+        <app-rightside></app-rightside>
+        <!--end color switcher-->
+
+    </div>
+    <!--End wrapper-->
+</div>
