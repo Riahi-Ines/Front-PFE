@@ -8,7 +8,7 @@ import { FormControl, FormBuilder, FormGroup, Validator, Validators } from '@ang
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  // variables
+
   show: boolean;
   show2: boolean;
   public registerForm: FormGroup;
