@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import * as $ from 'jquery';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators } from '@angular/forms'
+import { User } from 'src/app/models/user';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -79,7 +80,11 @@ export class RegisterComponent implements OnInit {
   get chek() { return this.registerForm.get('chek') }
 
   registerUser() {
-    console.log(this.registerForm.value)
+    let data=this.registerForm.value;
+
+   let user=new User(data.fullname,data.lastname,data.email,data.image,data.service,data.function,data.password)
+
+   console.log(user);
   }
 
 }

@@ -2,7 +2,9 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 import * as $ from 'jquery';
-
+import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,16 +14,21 @@ export class LoginComponent implements OnInit {
   // variables
   show3: boolean;
   public loginForm: FormGroup;
-  constructor(builder: FormBuilder, private elementRef: ElementRef, @Inject(DOCUMENT) private doc) {
+  public errorMessage: String = "";
+  constructor(builder: FormBuilder, private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private _router: Router, private userservice: UserService) {
     // initialize variables values
     this.show3 = false;
     let loginformscontrol = {
       chek: new FormControl("", [Validators.required,]),
+      email: new FormControl(),
+      password: new FormControl(),
     }
     this.loginForm = builder.group(loginformscontrol);
   }
   ngOnInit(): void {
-    
+
+    if(this.userservice.isLogged())
+    {this._router.navigateByUrl('/dashboard');}
 
     var s1 = document.createElement("script");
     s1.type = "text/javascript";
@@ -52,15 +59,32 @@ export class LoginComponent implements OnInit {
     s6.type = "text/javascript";
     s6.src = "assets/js/app-script.js";
     this.elementRef.nativeElement.appendChild(s6);
-
   }
   get chek() { return this.loginForm.get('chek') }
-    // click event function toggle
-    showpassword3() {
-      this.show3 = !this.show3;
-    }
-    loginUser() {
-      console.log(this.loginForm.value)
-    }
+  get email() { return this.loginForm.get('email') }
+  get password() { return this.loginForm.get('password') }
+
+  loginUser() {
+    console.log(this.loginForm.value)
+    let data = this.loginForm.value
+    let user = new User(null, null, data.email, null, null, null, data.password);
+    this.userservice.LogIn(user).subscribe(
+      (result) => {
+        console.log(result);
+        localStorage.setItem("mytoken", result.token);
+        this._router.navigateByUrl('/dashboard');
+      },
+      (err) => {
+
+        this.errorMessage = err.error.message;
+      }
+    )
+
+  }
+  // click event function toggle
+  showpassword3() {
+    this.show3 = !this.show3;
+  }
+
 }
 

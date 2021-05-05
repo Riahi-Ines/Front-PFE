@@ -31,7 +31,7 @@
               <label for="exampleInputUsername" class="sr-only">Username</label>
               <div class="position-relative has-icon-right">
                 <input type="text" id="exampleInputUsername" class="form-control input-shadow"
-                  placeholder="Enter Username">
+                  placeholder="Enter Username" formControlName="email">
                 <div class="form-control-position">
                   <i class="icon-user" style="color:white;"></i>
                 </div>
@@ -41,11 +41,11 @@
             <div class="form-group">
               <label for="exampleInputPassword" class="sr-only">Password</label>
               <div class="position-relative has-icon-right">
-                <input [type]="show3 ? 'text' : 'password'"  id="exampleInputPassword" class="form-control input-shadow"
-                  placeholder="Enter Password">
-                  <div class="form-control-position">
-                    <a (click)= "showpassword3()"><i class="icon-lock" style="color:white;"></i></a>
-                  </div>
+                <input [type]="show3 ? 'text' : 'password'" id="exampleInputPassword" class="form-control input-shadow"
+                  placeholder="Enter Password" formControlName="password">
+                <div class="form-control-position">
+                  <a (click)="showpassword3()"><i class="icon-lock" style="color:white;"></i></a>
+                </div>
               </div>
             </div>
             <div class="form-row">
@@ -62,7 +62,10 @@
                 <a class="nav-link" routerLink="/reset">Reset Password</a>
               </div>
             </div>
-            <button  type="submit"  [disabled]="loginForm.invalid" class="btn btn-light btn-block">Sign In</button>
+            <button type="submit" [disabled]="loginForm.invalid" class="btn btn-light btn-block">Sign In</button>
+            <div class="text-center text-danger mt-3">
+              {{errorMessage}}
+          </div>
           </form>
         </div>
       </div>
