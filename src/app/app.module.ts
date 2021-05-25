@@ -22,6 +22,13 @@ import { ReportingComponent } from './components/private/shared/reporting/report
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import{HttpClientModule} from '@angular/common/http';
 
+
+import {
+  ToastrModule,
+  ToastNoAnimation,
+  ToastNoAnimationModule
+} from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +46,7 @@ import{HttpClientModule} from '@angular/common/http';
     ProfileComponent,
     SidebarComponent,
     TopbarComponent,
-    ReportingComponent, 
+    ReportingComponent,
   ],
 
 
@@ -51,6 +58,7 @@ import{HttpClientModule} from '@angular/common/http';
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
+  ToastNoAnimationModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

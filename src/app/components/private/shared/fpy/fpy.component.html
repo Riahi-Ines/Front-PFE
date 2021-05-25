@@ -23,9 +23,9 @@
                                 <div class="form-group">
                                     <label>
                                         <div class="position-relative has-icon-right">
-                                            <input id="date" [readonly]="true" placeholder="Put a range DateTime "
-                                                [owlDateTimeTrigger]="dt10" [owlDateTime]="dt10" [selectMode]="'range'">
-                                            <owl-date-time #dt10></owl-date-time>
+                                            <input [owlDateTime]="dt2" placeholder="Date Time">
+                                            <span [owlDateTimeTrigger]="dt2"><i class="fa fa-calendar"></i></span>
+                                            <owl-date-time #dt2></owl-date-time>
                                         </div>
                                     </label>
                                 </div>

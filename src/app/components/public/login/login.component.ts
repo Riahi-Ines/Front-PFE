@@ -1,10 +1,10 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
-import * as $ from 'jquery';
-import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +15,12 @@ export class LoginComponent implements OnInit {
   show3: boolean;
   public loginForm: FormGroup;
   public errorMessage: String = "";
-  constructor(builder: FormBuilder, private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private _router: Router, private userservice: UserService) {
+  constructor(builder: FormBuilder,
+              private elementRef: ElementRef,
+              @Inject(DOCUMENT) private doc,
+              private _router: Router,
+              private userservice: UserService,
+              private toastr: ToastrService) {
     // initialize variables values
     this.show3 = false;
     let loginformscontrol = {
@@ -65,21 +70,20 @@ export class LoginComponent implements OnInit {
   get password() { return this.loginForm.get('password') }
 
   loginUser() {
-    console.log(this.loginForm.value)
-    let data = this.loginForm.value
-    let user = new User(null, null, data.email, null, null, null, data.password);
-    this.userservice.LogIn(user).subscribe(
-      (result) => {
-        console.log(result);
-        localStorage.setItem("mytoken", result.token);
+    let data = this.loginForm.value;
+
+    let user = new User(null,null,data.email,null,null,null,data.password);
+
+    this.userservice.SignIn(user).subscribe(
+      (res) => {
+        console.log(res);
+        localStorage.setItem("mytoken", res.token);
         this._router.navigateByUrl('/dashboard');
       },
       (err) => {
-
-        this.errorMessage = err.error.message;
+        this.errorMessage=err.error.message;
       }
     )
-
   }
   // click event function toggle
   showpassword3() {

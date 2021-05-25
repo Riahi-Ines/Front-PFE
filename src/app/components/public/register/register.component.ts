@@ -3,27 +3,35 @@ import { DOCUMENT } from '@angular/common';
 import * as $ from 'jquery';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators } from '@angular/forms'
 import { User } from 'src/app/models/user';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  imageData: string;
   show: boolean;
   show2: boolean;
   public registerForm: FormGroup;
-  constructor(builder: FormBuilder, private elementRef: ElementRef, @Inject(DOCUMENT) private doc) {
+  constructor(builder: FormBuilder, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
+  private userService:UserService,
+  private router:Router,
+  private toastr: ToastrService) {
     // initialize variables values
+   
     this.show = false;
     this.show2 = false;
     let registerformscontrol = {
-      fullname: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(10), Validators.pattern("[A-Z][A-Za-z'é]*")]),
+      firstname: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(10), Validators.pattern("[A-Z][A-Za-z'é]*")]),
       lastname: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern("[A-Z][A-Za-z 'é]*")]),
-      service: new FormControl("", [Validators.required,]),
-      function: new FormControl("", [Validators.required,]),
-      photo: new FormControl("", [Validators.required,]),
       email: new FormControl("", [Validators.required, Validators.email, Validators.pattern("^[a-z][a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@+asteelflash+.com")]),
+      photo: new FormControl("", [Validators.required,]),
+      service: new FormControl("", [Validators.required,]),
+      post: new FormControl("", [Validators.required,]),
       password: new FormControl("", [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>"\'`\\;:\{\\\}\\\[\\\]\\\|\\\+\\\-\\\=\\\_\\\)\\\(\\\)\\\`\\\/\\\\\\]])[A-Za-z0-9\d$@].{1,}')]),
       repassword: new FormControl("", [Validators.required,]),
       chek: new FormControl("", [Validators.required,]),
@@ -69,23 +77,44 @@ export class RegisterComponent implements OnInit {
   showpassword2() {
     this.show2 = !this.show2;
   }
-  get fullname() { return this.registerForm.get('fullname') }
+  get firstname() { return this.registerForm.get('firstname') }
   get lastname() { return this.registerForm.get('lastname') }
-  get service() { return this.registerForm.get('service') }
-  get function() { return this.registerForm.get('function') }
-  get photo() { return this.registerForm.get('photo') }
   get email() { return this.registerForm.get('email') }
+  get photo() { return this.registerForm.get('photo') }
+  get service() { return this.registerForm.get('service') }
+  get post() { return this.registerForm.get('post') }
   get password() { return this.registerForm.get('password') }
   get repassword() { return this.registerForm.get('repassword') }
   get chek() { return this.registerForm.get('chek') }
 
+  onFileSelect(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.registerForm.patchValue({ image: file });
+    const allowedMimeTypes = ["image/png", "image/jpeg", "image/jpg"];
+    if (file && allowedMimeTypes.includes(file.type)) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageData = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   registerUser() {
     let data=this.registerForm.value;
 
-   let user=new User(data.fullname,data.lastname,data.email,data.image,data.service,data.function,data.password)
-
-   console.log(user);
+   let user=new User(data.firstname,data.lastname,data.email,data.uploadfile,data.service,data.post,data.password)
+   this.registerForm.reset();
+   this.imageData = null;
+   this.userService.SignUp(user).subscribe(
+    res=>{
+      this.toastr.success(res.message);
+      this.router.navigate(['/login']);
+    },
+    err=>{
+      console.log(err);
+    }
+  )
   }
-
+ 
 }
-

@@ -17,19 +17,19 @@
 						<img src="assets/images/logo-icon.png" style="height: 70px;width: 70px;">
 					</div>
 					<div class="card-title text-uppercase text-center py-3">Sign Up</div>
-					<form [formGroup]="registerForm" class="user" (ngSubmit)="registerUser()">
+					<form [formGroup]="registerForm" class="user" (ngSubmit)="registerUser()" enctype="multipart/form-data">
 						<div class="row mb-3">
 							<div class="col">
 								<div class="form-group">
 									<label for="exampleInputName" class="sr-only">First Name</label>
 									<div class="position-relative has-icon-right">
 										<input type="text" id="exampleInputName" class="form-control form-control-user"
-											placeholder="Enter Your First Name" formControlName="fullname">
-										<div *ngIf="fullname.touched && fullname.invalid" class="text-danger bg-blue">
-											<div *ngIf="fullname.errors.required">* Firstname is required</div>
-											<div *ngIf="fullname.errors.minlength">* Firstname must contain 3 letters at least</div>
-											<div *ngIf="fullname.errors.maxlength">* Firstname must contain 10 letters at least</div>
-											<div *ngIf="fullname.errors.pattern">* Invalid format</div>
+											placeholder="Enter Your First Name" formControlName="firstname">
+										<div *ngIf="firstname.touched && firstname.invalid" class="text-danger bg-blue">
+											<div *ngIf="firstname.errors.required">* Firstname is required</div>
+											<div *ngIf="firstname.errors.minlength">* Firstname must contain 3 letters at least</div>
+											<div *ngIf="firstname.errors.maxlength">* Firstname must contain 10 letters at least</div>
+											<div *ngIf="firstname.errors.pattern">* Invalid format</div>
 										</div>
 										<div class="form-control-position">
 											<i class="icon-user" style="color:white;"></i>
@@ -76,17 +76,17 @@
 							</div>
 							<div class="col">
 								<div class="form-group">
-									<label for="exampleInputfunction" class="sr-only">Function</label>
+									<label for="exampleInputfunction" class="sr-only">Post</label>
 									<div class="position-relative has-icon-right">
-										<select class="form-control form-control-user"formControlName="function">
+										<select class="form-control form-control-user"formControlName="post">
 											<option value="" disabled selected hidden>Choose a Function</option>
 											<option>Directeur</option>
 											<option>Responsable</option>
 											<option>Ingénieur</option>
 											<option>Technicien</option>
 										</select>
-										<div *ngIf="function.touched && function.invalid" class="text-danger">
-											<div *ngIf="function.errors.required">* Function is required</div>
+										<div *ngIf="post.touched && post.invalid" class="text-danger">
+											<div *ngIf="post.errors.required">* Function is required</div>
 										</div>
 									</div>
 								</div>
@@ -132,13 +132,16 @@
 						<div class="row mb-3">
 							<div class="col">
 								<div class="form-group">
-									<label for="ExamplePhoto" class="sr-only">Image</label>
+									<label for="ExamplePhoto" class="sr-only">Photo</label>
 									<div class="position-relative has-icon-right">
-										<input class="form-control" type="file" id="ExamplePhoto" name="avatar"
-											accept="image/png, image/jpeg"formControlName="photo">
+										<input class="form-control" type="file" (change)="onFileSelect($event)" 
+											formControlName="photo">
 											<div *ngIf="photo.touched && photo.invalid" class="text-danger">
 												<div *ngIf="photo.errors.required">* Photo is required</div>
 											</div>
+											 <div *ngIf="imageData">
+ 												   <img [src]="imageData" [alt]="form.value.name" id="avatar"/>
+ 											 </div>
 									</div>
 								</div>
 							</div>

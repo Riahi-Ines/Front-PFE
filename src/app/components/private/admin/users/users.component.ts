@@ -1,6 +1,9 @@
 import { Component, OnInit, ElementRef, Inject  } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import * as $ from 'jquery';
+import { UserService } from 'src/app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
+
+
 
 @Component({
   selector: 'app-users',
@@ -8,10 +11,15 @@ import * as $ from 'jquery';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-
-  constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc) { }
+  public users: any[] = [];
+  constructor(private elementRef: ElementRef,
+     @Inject(DOCUMENT) private doc,
+     private userservice: UserService,
+     private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.getallusers();
+
     var s1 = document.createElement("script");
     s1.type = "text/javascript";
     s1.src = "assets/js/jquery.min.js";
@@ -42,6 +50,29 @@ export class UsersComponent implements OnInit {
     s6.src = "assets/js/app-script.js";
     this.elementRef.nativeElement.appendChild(s6);
 
+   
   }
 
+  getallusers() {
+    this.userservice.getAllUsers().subscribe(res => {
+      this.users=res
+    },error =>{
+      console.log(error)
+    } 
+    )
+  }
+
+  delete(user) {
+    let index = this.users.indexOf(user)
+    this.users.splice(index, 1);
+    this.userservice.deleteUser(user.id).subscribe(
+      res => {
+        this.getallusers();
+        this.toastr.success('User deleted succefully!','Good !');
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
 }

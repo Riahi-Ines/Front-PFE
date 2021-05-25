@@ -17,8 +17,8 @@
     margin-left: 700px;
     margin-bottom: 10px;
   }
-  body{
-    height: auto;
+  #body{
+    height: 100%;
   }
   
   .form-control:focus{
