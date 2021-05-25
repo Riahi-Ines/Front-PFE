@@ -6,6 +6,7 @@ import { User } from 'src/app/models/user';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -13,12 +14,13 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  imageData: string;
+ selectedFile:File=null;
+ imageData: string;
   show: boolean;
   show2: boolean;
   public registerForm: FormGroup;
   constructor(builder: FormBuilder, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
-  private userService:UserService,
+  private userService:UserService,private http:HttpClient,
   private router:Router,
   private toastr: ToastrService) {
     // initialize variables values
@@ -87,26 +89,33 @@ export class RegisterComponent implements OnInit {
   get repassword() { return this.registerForm.get('repassword') }
   get chek() { return this.registerForm.get('chek') }
 
-  onFileSelect(event: Event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    this.registerForm.patchValue({ image: file });
-    const allowedMimeTypes = ["image/png", "image/jpeg", "image/jpg"];
-    if (file && allowedMimeTypes.includes(file.type)) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imageData = reader.result as string;
-      };
-      reader.readAsDataURL(file);
+ /* onFileSelect(event: Event) {
+    c*/
+    onFileSelect(event)
+    {
+      this.selectedFile = <File>event.target.files[0]
+      this.registerForm.patchValue({ image: this.selectedFile });
+      const allowedMimeTypes = ["image/png", "image/jpeg", "image/jpg"];
+      if (this.selectedFile && allowedMimeTypes.includes(this.selectedFile.type)) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.imageData = reader.result as string;
+        };
+        reader.readAsDataURL(this.selectedFile);
+      }
     }
-  }
 
   registerUser() {
-    let data=this.registerForm.value;
-
-   let user=new User(data.firstname,data.lastname,data.email,data.uploadfile,data.service,data.post,data.password)
-   this.registerForm.reset();
-   this.imageData = null;
-   this.userService.SignUp(user).subscribe(
+   const fd=new FormData();
+   fd.append('firstname', this.registerForm.value.firstname);
+   fd.append('lastname', this.registerForm.value.lastname);
+   fd.append('email', this.registerForm.value.email);
+    fd.append('photo',this.selectedFile,this.selectedFile.name);
+    fd.append('service', this.registerForm.value.service);
+    fd.append('post', this.registerForm.value.post);
+    fd.append('password', this.registerForm.value.password);
+    this.imageData = null;
+   this.userService.SignUp(fd).subscribe(
     res=>{
       this.toastr.success(res.message);
       this.router.navigate(['/login']);

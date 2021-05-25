@@ -21,6 +21,7 @@ import { TopbarComponent } from './components/private/shared/topbar/topbar.compo
 import { ReportingComponent } from './components/private/shared/reporting/reporting.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import{HttpClientModule} from '@angular/common/http';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 import {
@@ -58,7 +59,8 @@ import {
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
-  ToastNoAnimationModule.forRoot(),
+    ToastNoAnimationModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

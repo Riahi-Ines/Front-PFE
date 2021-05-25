@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, Inject  } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, PathLocationStrategy } from '@angular/common';
 import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
+  p: number = 1;
   public users: any[] = [];
   constructor(private elementRef: ElementRef,
      @Inject(DOCUMENT) private doc,
@@ -56,6 +57,7 @@ export class UsersComponent implements OnInit {
   getallusers() {
     this.userservice.getAllUsers().subscribe(res => {
       this.users=res
+      console.log(res)
     },error =>{
       console.log(error)
     } 
@@ -63,6 +65,7 @@ export class UsersComponent implements OnInit {
   }
 
   delete(user) {
+    if (confirm('Are sure you want to delete this User ?')) {
     let index = this.users.indexOf(user)
     this.users.splice(index, 1);
     this.userservice.deleteUser(user.id).subscribe(
@@ -74,5 +77,5 @@ export class UsersComponent implements OnInit {
         console.log(error);
       }
     )
-  }
+  }}
 }

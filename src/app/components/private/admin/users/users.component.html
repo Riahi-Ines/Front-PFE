@@ -44,8 +44,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let user of users ">
-                                            <img [src]="user.photo"/>
+                                        <tr *ngFor="let user of users | paginate: { itemsPerPage: 4, currentPage: p }">
+                                            <td><a><img class="card-img-top img-responsive"
+                                                [src] = "user.photo"                                                style = "height :50px;width:fil-content"
+                                               alt=""></a></td>
                                             <td>{{user.firstname}}</td>
                                             <td>{{user.lastname}}</td>
                                             <td>{{user.email}}</td>
@@ -66,6 +68,7 @@
                                 </table>
                             </div>
                         </div>
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
                     </div>
                 </div>
                 <div class="overlay toggle-menu"></div>
