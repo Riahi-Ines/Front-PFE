@@ -6,7 +6,8 @@ export class User {
         private photo? :String,
         private service? :String,
         private post?: String,
-        private password? : String 
+        private password? : String ,
+        private id? :number,
     ){
 
     }

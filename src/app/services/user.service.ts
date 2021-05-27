@@ -8,7 +8,7 @@ export class UserService {
  baseURL:string = "http://localhost:3000";
   private singupUserUrl = this.baseURL + "/user/signup"
   private allusersUrl = this.baseURL + "/user/all"
-  private oneuserUrl = this.baseURL + "/user/one"
+  private oneuserUrl = this.baseURL + "/user/one/"
   private deleteUrl = this.baseURL + "/user/remove/"
   private updateUrl = this.baseURL + "/user/update/"
   private singinUserUrl = this.baseURL + "/user/signin"
@@ -65,16 +65,14 @@ export class UserService {
   getAllUsers() {
     return this.http.get<any>(this.allusersUrl)
   }
-  getOneUser(email) {
-    let dataFormaAPI = this.http.get<any>(this.oneuserUrl + email)
-    return dataFormaAPI;
+  getOneUser(id) {
+  return this.http.get<any>(this.oneuserUrl +id)
   }
   deleteUser(id) {
     return this.http.delete<any>(this.deleteUrl + id)
   }
-  updateUser(dataFormSigninForm, id) {
-    let dataFormaAPI = this.http.put<any>(dataFormSigninForm, this.updateUrl + id)
-    return dataFormaAPI;
+  updateUser(dataFormSigninForm) {
+    return this.http.put<any>(dataFormSigninForm, this.updateUrl )
   }
   SignIn(dataFormSigninForm) {
     console.log(dataFormSigninForm);

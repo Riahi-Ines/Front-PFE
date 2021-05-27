@@ -53,7 +53,7 @@ const routes: Routes = [
     component:FpyComponent
   },
   {
-    path:"profile",
+    path:"profile/:id",
     component:ProfileComponent
   },
 

@@ -115,13 +115,13 @@ export class RegisterComponent implements OnInit {
     fd.append('post', this.registerForm.value.post);
     fd.append('password', this.registerForm.value.password);
     this.imageData = null;
-   this.userService.SignUp(fd).subscribe(
+    this.userService.SignUp(fd).subscribe(
     res=>{
       this.toastr.success(res.message);
       this.router.navigate(['/login']);
     },
     err=>{
-      console.log(err);
+      this.toastr.error('Try with anathor email');
     }
   )
   }

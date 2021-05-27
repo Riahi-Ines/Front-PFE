@@ -47,12 +47,12 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <strong>Full Name</strong><strong></strong>
+                                            <strong>Firstname</strong><strong></strong>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <strong>Last Name</strong><strong></strong>
+                                            <strong>Lastname</strong><strong></strong>
                                         </td>
                                     </tr>
                                     <tr>
@@ -67,7 +67,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <strong>Function</strong> <strong></strong>
+                                            <strong>Post</strong> <strong></strong>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -83,21 +83,20 @@
                 <form [formGroup]="modifyForm" class="user" (ngSubmit)="modifyUser()">
                     <div class="form-group row">
                         <label for="exampleInputName"
-                            class="col-lg-3 col-form-label form-control-label">Full
-                            name</label>
+                            class="col-lg-3 col-form-label form-control-label">Firstname</label>
                         <div class="col-lg-9">
                             <input type="text" id="exampleInputName"
                                 class="form-control form-control-user"
-                                placeholder="Enter Your First Name" formControlName="fullname">
-                            <div *ngIf="fullname.touched && fullname.invalid"
+                                placeholder="Enter Your First Name" formControlName="firstname">
+                            <div *ngIf="firstname.touched && firstname.invalid"
                                 class="text-danger bg-blue">
-                                <div *ngIf="fullname.errors.required">* Firstname is required
+                                <div *ngIf="firstname.errors.required">* Firstname is required
                                 </div>
-                                <div *ngIf="fullname.errors.minlength">* Firstname must contain
+                                <div *ngIf="firstname.errors.minlength">* Firstname must contain
                                     3 letters at least</div>
-                                <div *ngIf="fullname.errors.maxlength">* Firstname must contain
+                                <div *ngIf="firstname.errors.maxlength">* Firstname must contain
                                     10 letters at least</div>
-                                <div *ngIf="fullname.errors.pattern">* Invalid format</div>
+                                <div *ngIf="firstname.errors.pattern">* Invalid format</div>
                             </div>
                         </div>
                     </div>
@@ -141,11 +140,12 @@
                             class="col-lg-3 col-form-label form-control-label">Change
                             profile</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="file" id="avatar" name="avatar"
+                            <input class="form-control" type="file"
                                 accept="image/png, image/jpeg" formControlName="photo">
                             <div *ngIf="photo.touched && photo.invalid" class="text-danger">
                                 <div *ngIf="photo.errors.required">* Photo is required</div>
                             </div>
+                          
                         </div>
                     </div>
                     <div class="form-group row">
@@ -153,12 +153,12 @@
                             class="col-lg-3 col-form-selectform-control-select">Service</label>
                         <div class="col-lg-9">
                             <select class="form-control form-control-sm"
-                                formControlName="service">
+                                formControlName="service" id="service">
                                 <option value="" disabled selected hidden></option>
-                                <option>Production</option>
-                                <option>Maintenance</option>
-                                <option>Qualité</option>
-                                <option>Lean</option>
+                                <option value="Production">Production</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Qualité">Qualité</option>
+                                <option value="Lean">Lean</option>
                             </select>
                             <div *ngIf="service.touched && service.invalid" class="text-danger">
                                 <div *ngIf="service.errors.required">* Service is required</div>
@@ -166,20 +166,20 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="exampleInputfunction"
-                            class="col-lg-3 col-form-selectform-control-select">Function</label>
+                        <label for="exampleInputpost"
+                            class="col-lg-3 col-form-selectform-control-select">Post</label>
                         <div class="col-lg-9">
                             <select class="form-control form-control-sm"
-                                formControlName="function">
+                                formControlName="post">
                                 <option value="" disabled selected hidden></option>
-                                <option>Directeur</option>
-                                <option>Responsable</option>
-                                <option>Ingénieur</option>
-                                <option>Technicien</option>
+                                <option value="1">Directeur</option>
+                                <option value="2">Responsable</option>
+                                <option value="3">Ingénieur</option>
+                                <option value="4">Technicien</option>
                             </select>
-                            <div *ngIf="function.touched && function.invalid"
+                            <div *ngIf="post.touched && post.invalid"
                                 class="text-danger">
-                                <div *ngIf="function.errors.required">* Function is required
+                                <div *ngIf="post.errors.required">* Post is required
                                 </div>
                             </div>
                         </div>

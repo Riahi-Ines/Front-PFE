@@ -46,7 +46,7 @@
                                     <tbody>
                                         <tr *ngFor="let user of users | paginate: { itemsPerPage: 4, currentPage: p }">
                                             <td><a><img class="card-img-top img-responsive"
-                                                [src] = "user.photo"                                                style = "height :50px;width:fil-content"
+                                                [src] = "user.photo" style = "height :52px;width:52px"
                                                alt=""></a></td>
                                             <td>{{user.firstname}}</td>
                                             <td>{{user.lastname}}</td>
@@ -55,12 +55,11 @@
                                             <td>{{user.post}}</td>
                                             <td>
                                                 <div class="d-grid gap-2 d-md-block">
-                                                    <button class="btn btn-info btn-sm " type="button"><i
-                                                            class="fa fa-unlock-alt "></i></button>
-                                                    <button class="btn btn-warning btn-sm" type="button"><i
+                                                    <button class="btn btn-warning btn-sm" [routerLink]="['/profile',user.id]"><i
                                                             class="fa fa-edit"></i></button>
-                                                    <button class="btn btn-danger mx-3"
-                                                        (click)="delete(user)">Delete</button>
+                                                    <button class="btn btn-danger mx-3" 
+                                                        (click)="delete(user)"><i
+                                                        class="fa fa-trash"></i></button>
                                                 </div>
                                             </td>
                                         </tr>

@@ -1,7 +1,10 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import * as $ from 'jquery';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/models/user';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -9,20 +12,26 @@ import { FormControl, FormBuilder, FormGroup, Validator, Validators } from '@ang
 })
 export class ProfileComponent implements OnInit {
   // variables
+  selectedFile:File=null;
+  imageData: string;
   show: boolean;
   show2: boolean;
   public modifyForm: FormGroup;
-  constructor(builder: FormBuilder, private elementRef: ElementRef, @Inject(DOCUMENT) private doc) {
+  constructor(builder: FormBuilder, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
+  private route:ActivatedRoute,
+  private userService:UserService,
+  private router : Router,
+  private toastr: ToastrService) {
     // initialize variables values
     this.show = false;
     this.show2 = false;
     let modifyformscontrol = {
-      fullname: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(10), Validators.pattern("[A-Z][A-Za-z'é]*")]),
+      firstname: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(10), Validators.pattern("[A-Z][A-Za-z'é]*")]),
       lastname: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern("[A-Z][A-Za-z 'é]*")]),
-      service: new FormControl("", [Validators.required,]),
-      function: new FormControl("", [Validators.required,]),
-      photo: new FormControl("", [Validators.required,]),
       email: new FormControl("", [Validators.required, Validators.email, Validators.pattern("^[a-z][a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@+asteelflash+.com")]),
+      photo: new FormControl("", [Validators.required,]),
+      service: new FormControl("", [Validators.required,]),
+      post: new FormControl("", [Validators.required,]),
       password: new FormControl("", [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>"\'`\\;:\{\\\}\\\[\\\]\\\|\\\+\\\-\\\=\\\_\\\)\\\(\\\)\\\`\\\/\\\\\\]])[A-Za-z0-9\d$@].{1,}')]),
       repassword: new FormControl("", [Validators.required,]),
     }
@@ -30,6 +39,26 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let idUser = this.route.snapshot.params.id;
+    this.userService.getOneUser(idUser).subscribe(
+      res=>{
+        let user = res;
+
+        this.modifyForm.patchValue({
+          firstname : user.firstname,
+          lastname : user.lastname,
+          email : user.email,
+          photo : user.photo,
+         
+          passord:user.password,
+        })
+        this.modifyForm.controls['service'].setValue('Maintenance', {onlySelf: true});
+        
+      },
+      err=>{
+        console.log(err);
+      }
+    )
     var s1 = document.createElement("script");
     s1.type = "text/javascript";
     s1.src = "assets/js/jquery.min.js";
@@ -67,18 +96,47 @@ export class ProfileComponent implements OnInit {
   showpassword2() {
     this.show2 = !this.show2;
   }
-  get fullname() { return this.modifyForm.get('fullname') }
+  get firstname() { return this.modifyForm.get('firstname') }
   get lastname() { return this.modifyForm.get('lastname') }
-  get service() { return this.modifyForm.get('service') }
-  get function() { return this.modifyForm.get('function') }
-  get photo() { return this.modifyForm.get('photo') }
   get email() { return this.modifyForm.get('email') }
+  get photo() { return this.modifyForm.get('photo') }
+  get service() { return this.modifyForm.get('service') }
+  get post() { return this.modifyForm.get('post') }
   get password() { return this.modifyForm.get('password') }
   get repassword() { return this.modifyForm.get('repassword') }
   get chek() { return this.modifyForm.get('chek') }
 
+  onFileSelect(event)
+  {
+    this.selectedFile = <File>event.target.files[0]
+    this.modifyForm.patchValue({ image: this.selectedFile });
+    const allowedMimeTypes = ["image/png", "image/jpeg", "image/jpg"];
+    if (this.selectedFile && allowedMimeTypes.includes(this.selectedFile.type)) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageData = reader.result as string;
+      };
+      reader.readAsDataURL(this.selectedFile);
+    }
+  }
   modifyUser() {
-    console.log(this.modifyForm.value)
+    const fd=new FormData();
+   fd.append('firstname', this.modifyForm.value.firstname);
+   fd.append('lastname', this.modifyForm.value.lastname);
+   fd.append('email', this.modifyForm.value.email);
+    fd.append('photo',this.selectedFile,this.selectedFile.name);
+    fd.append('service', this.modifyForm.value.service);
+    fd.append('post', this.modifyForm.value.post);
+    fd.append('password', this.modifyForm.value.password);
+    this.userService.updateUser(fd).subscribe(
+      res=>{
+        this.toastr.warning(res.message);
+        this.router.navigate(['/users']);
+      },
+      err=>{
+        console.log(err);
+      }
+    )
   }
 
 }
