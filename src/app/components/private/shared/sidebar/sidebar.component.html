@@ -27,7 +27,7 @@
     </li>
 
     <li>
-      <a class="nav-link" routerLink="/users">
+      <a *ngIf="this.user.role =='admin'" class="nav-link" routerLink="/users">
         <i class="zmdi zmdi-accounts-list"></i> <span>Users</span>
       </a>
     </li>

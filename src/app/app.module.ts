@@ -29,6 +29,7 @@ import {
   ToastNoAnimation,
   ToastNoAnimationModule
 } from 'ngx-toastr';
+import { UpdateUserComponent } from './components/private/admin/update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {
     SidebarComponent,
     TopbarComponent,
     ReportingComponent,
+    UpdateUserComponent,
   ],
 
 

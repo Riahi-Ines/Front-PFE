@@ -25,7 +25,7 @@
                             <h5 class="card-title">Users Details</h5>
                             <div class="nav-item">
                                 <form class="search-bar">
-                                    <input type="text" class="form-control" placeholder="Enter keywords">
+                                    <input type="text" class="form-control" placeholder="Enter keywords" (input)="filter($event.target.value)">
                                     <i class="icon-magnifier" style="margin-top:-22px;"></i>
                                 </form>
                             </div>
@@ -55,7 +55,7 @@
                                             <td>{{user.post}}</td>
                                             <td>
                                                 <div class="d-grid gap-2 d-md-block">
-                                                    <button class="btn btn-warning btn-sm" [routerLink]="['/profile',user.id]"><i
+                                                    <button class="btn btn-warning btn-sm" [routerLink]="['/update',user.id]"><i
                                                             class="fa fa-edit"></i></button>
                                                     <button class="btn btn-danger mx-3" 
                                                         (click)="delete(user)"><i

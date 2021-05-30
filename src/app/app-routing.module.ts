@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UpdateUserComponent } from './components/private/admin/update-user/update-user.component';
 import { UsersComponent } from './components/private/admin/users/users.component';
 import { DashboaredComponent } from './components/private/shared/dashboard/dashboared.component';
 import { DefectsComponent } from './components/private/shared/defects/defects.component';
@@ -53,8 +54,12 @@ const routes: Routes = [
     component:FpyComponent
   },
   {
-    path:"profile/:id",
+    path:"profile",
     component:ProfileComponent
+  },
+  {
+    path:"update/:id",
+    component:UpdateUserComponent
   },
 
   {

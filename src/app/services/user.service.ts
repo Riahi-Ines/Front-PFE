@@ -5,7 +5,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
   providedIn: 'root'
 })
 export class UserService {
- baseURL:string = "http://localhost:3000";
+  baseURL: string = "http://localhost:3000";
   private singupUserUrl = this.baseURL + "/user/signup"
   private allusersUrl = this.baseURL + "/user/all"
   private oneuserUrl = this.baseURL + "/user/one/"
@@ -14,7 +14,7 @@ export class UserService {
   private singinUserUrl = this.baseURL + "/user/signin"
 
 
-  constructor(private http: HttpClient) { } 
+  constructor(private http: HttpClient) { }
   SignUp(dataFormSigninForm) {
     console.log(dataFormSigninForm);
     return this.http.post<any>(this.singupUserUrl, dataFormSigninForm)
@@ -66,13 +66,13 @@ export class UserService {
     return this.http.get<any>(this.allusersUrl)
   }
   getOneUser(id) {
-  return this.http.get<any>(this.oneuserUrl +id)
+    return this.http.get<any>(this.oneuserUrl + id)
   }
   deleteUser(id) {
     return this.http.delete<any>(this.deleteUrl + id)
   }
-  updateUser(dataFormSigninForm) {
-    return this.http.put<any>(dataFormSigninForm, this.updateUrl )
+  updateUser(id,dataFormSigninForm) {
+    return this.http.put<any>(this.updateUrl+id, dataFormSigninForm)
   }
   SignIn(dataFormSigninForm) {
     console.log(dataFormSigninForm);

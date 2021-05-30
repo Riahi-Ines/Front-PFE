@@ -27,7 +27,7 @@
    
      <li class="nav-item">
        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
-         <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle" alt="user avatar"></span>
+         <span class="user-profile"><img [src]="this.user.photo" class="img-circle" alt="user avatar"></span>
        </a>
        <ul class="dropdown-menu dropdown-menu-right">
         <li class="dropdown-item user-details">
@@ -35,8 +35,8 @@
             <div class="media">
               <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
              <div class="media-body">
-             <h6 class="mt-2 user-title">Jriji Mohamed</h6>
-             <p class="user-subtitle">Jriji Mohamed@asteelflah.com</p>
+             <h6 class="mt-2 user-title">{{this.user.firstname}} {{this.user.lastname }}</h6>
+             <p class="user-subtitle">{{this.user.email}}</p>
              </div>
             </div>
            </a>

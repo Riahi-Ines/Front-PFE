@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Inject  } from '@angular/core';
+import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT, PathLocationStrategy } from '@angular/common';
 import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
@@ -13,10 +13,12 @@ import { ToastrService } from 'ngx-toastr';
 export class UsersComponent implements OnInit {
   p: number = 1;
   public users: any[] = [];
+  public usersOR: any[] = [];
+
   constructor(private elementRef: ElementRef,
-     @Inject(DOCUMENT) private doc,
-     private userservice: UserService,
-     private toastr: ToastrService) { }
+    @Inject(DOCUMENT) private doc,
+    private userservice: UserService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getallusers();
@@ -51,31 +53,46 @@ export class UsersComponent implements OnInit {
     s6.src = "assets/js/app-script.js";
     this.elementRef.nativeElement.appendChild(s6);
 
-   
+
   }
 
   getallusers() {
     this.userservice.getAllUsers().subscribe(res => {
-      this.users=res
+      this.users = res
+      this.usersOR = res
       console.log(res)
-    },error =>{
+    }, error => {
       console.log(error)
-    } 
+    }
     )
   }
 
   delete(user) {
     if (confirm('Are sure you want to delete this User ?')) {
-    let index = this.users.indexOf(user)
-    this.users.splice(index, 1);
-    this.userservice.deleteUser(user.id).subscribe(
-      res => {
-        this.getallusers();
-        this.toastr.success('User deleted succefully!','Good !');
-      },
-      (error) => {
-        console.log(error);
-      }
+      let index = this.users.indexOf(user)
+      this.users.splice(index, 1);
+      this.userservice.deleteUser(user.id).subscribe(
+        res => {
+          this.getallusers();
+          this.toastr.success('User deleted succefully!', 'Good !');
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
+  }
+
+
+  filter(data) {
+    this.users = this.usersOR.filter(u => {
+      return (
+        u.email.includes(data) ||
+        u.firstname.includes(data) ||
+        u.lastname.includes(data) 
+        )
+    }
     )
-  }}
+
+  }
 }
