@@ -2,7 +2,8 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT, PathLocationStrategy } from '@angular/common';
 import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
-
+import {MatDialog,MatDialogConfig} from "@angular/material/dialog";
+import { UpdateUserComponent } from '../update-user/update-user.component';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class UsersComponent implements OnInit {
   constructor(private elementRef: ElementRef,
     @Inject(DOCUMENT) private doc,
     private userservice: UserService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,private dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.getallusers();
@@ -94,5 +95,8 @@ export class UsersComponent implements OnInit {
     }
     )
 
+  }
+  onupdate(){
+this.dialog.open(UpdateUserComponent)
   }
 }

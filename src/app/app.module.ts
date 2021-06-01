@@ -22,6 +22,7 @@ import { ReportingComponent } from './components/private/shared/reporting/report
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import{HttpClientModule} from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 import {
@@ -62,9 +63,11 @@ import { UpdateUserComponent } from './components/private/admin/update-user/upda
     ReactiveFormsModule,
     HttpClientModule,
     ToastNoAnimationModule.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[UpdateUserComponent]
 })
 export class AppModule { }

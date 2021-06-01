@@ -35,7 +35,6 @@ export class UserService {
 
     }
   }
-
   isLoggedUser() {
     let token = localStorage.getItem("mytoken");
     if (!token) {
