@@ -1,14 +1,27 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import * as $ from 'jquery';
+import { AbbService } from '../../../../services/abb.service'
+import { HoneywellService } from '../../../../services/honeywell.service'
+
 @Component({
   selector: 'app-defects',
   templateUrl: './defects.component.html',
   styleUrls: ['./defects.component.css']
 })
 export class DefectsComponent implements OnInit {
+  public dateDebut: any
+  public dateFint: any
+  public ABB1: any
+  public data: any
+  public select: any
+  public results2 :any
+  public select2: any
+  public type: any
+  public type2: any
+  public results3:any
+  public results: any
 
-  constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc) { }
+  constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: AbbService, private service2: HoneywellService) { }
 
   ngOnInit(): void {
     var s1 = document.createElement("script");
@@ -41,6 +54,68 @@ export class DefectsComponent implements OnInit {
     s6.src = "assets/js/app-script.js";
     this.elementRef.nativeElement.appendChild(s6);
 
+  }
+
+  getListeABB() {
+    this.data = {
+      dateDebut: this.dateDebut,
+      dateFint: this.dateFint
+    }
+    if (this.ABB1 == 'ABB') {
+      this.service.getABB(this.data).subscribe((data) => {
+        this.select = data.recordset
+      })
+    } else {
+      this.service2.getHONEYWELL(this.data).subscribe((data) => {
+        this.select = data.recordset
+      })
+
+    }
+
+
+  }
+
+
+  getmachABB() {
+    this.data = {
+      dateDebut: this.dateDebut,
+      dateFint: this.dateFint
+    }
+    if (this.ABB1 == 'ABB') {
+      this.service.getABBmachine(this.data).subscribe((data) => {
+        this.select2 = data.recordset
+
+      })
+    } else {
+      this.service2.getHONEYWELLmachine(this.data).subscribe((data) => {
+        this.select2 = data.recordset
+      })
+
+    }
+  }
+
+  onChange(abb) {
+
+    this.ABB1 = abb
+    this.getListeABB()
+    this.getmachABB()
+  }
+
+  onChange2(data) {
+    this.type = data
+  }
+
+  dateDev(date) {
+
+
+    this.dateDebut = date.replace('T', ' ')
+
+  }
+
+
+  dateFin(date) {
+
+    this.dateFint = date.replace('T', ' ')
   }
 
 }

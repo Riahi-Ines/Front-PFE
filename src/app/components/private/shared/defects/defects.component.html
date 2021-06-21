@@ -18,16 +18,21 @@
 
                 <!--Start FPY Content-->
                 <form>
-                    <div class="col-xl-12 ">
+                    <div class="col-xl-12 col-lg-7">
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-group">
-                                    <label>
-                                        <div class="position-relative has-icon-right">
-                                            <input id="date" [readonly]="true" placeholder="Put a range DateTime "
-                                                [owlDateTimeTrigger]="dt10" [owlDateTime]="dt10" [selectMode]="'range'">
-                                            <owl-date-time #dt10></owl-date-time>
-                                        </div>
+                                    <label id="dt1">
+                                        Date Time From:
+                                        <input type="datetime-local" (change)="dateDev($event.target.value)" id="date" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label id="dt2">
+                                        Date Time To:
+                                        <input type="datetime-local" (change)="dateFin($event.target.value)" id="date" />
                                     </label>
                                 </div>
                             </div>
@@ -35,78 +40,47 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="exampleInputName" class="sr-only">Function</label>
+                                    <label for="exampleInputclient" class="sr-only">Client</label>
                                     <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded">
-                                            <option value="" disabled selected hidden>Choose a Function</option>
-                                            <option>Directeur</option>
-                                            <option>Responsable</option>
-                                            <option>Ingénieur</option>
-                                            <option>Technicien</option>
+                                        <select class="form-control form-control-rounded"
+                                            (change)="onChange($event.target.value)">
+                                            <option value="" disabled selected hidden>Choose a Client</option>
+                                            <option>HONEYWELL</option>
+                                            <option>ABB</option>
+                                            <option>SOMFY</option>
+                                            <option>BRANDT</option>
+                                            <option>FRESNUIS</option>
+                                            <option>MULLER</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="exampleInputName" class="sr-only">Function</label>
+                                    <label for="exampleInputline" class="sr-only">Line</label>
                                     <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded">
-                                            <option value="" disabled selected hidden>Choose a Function</option>
-                                            <option>Directeur</option>
-                                            <option>Responsable</option>
-                                            <option>Ingénieur</option>
-                                            <option>Technicien</option>
+                                        <select class="form-control form-control-rounded" *ngFor="let elemnt of select"
+                                            (change)="onChange2($event.target.value)">
+                                            <option value="" disabled selected hidden>Choose a production line</option>
+                                            <option>{{elemnt.TypeTest}}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="exampleInputName" class="sr-only">Machine</label>
+                                    <label for="exampleInputprod" class="sr-only">Product</label>
                                     <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded">
-                                            <option value="" disabled selected hidden>Choose Machine</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                        </select>
+                                        <select class="form-control form-control-rounded" *ngFor="let elemnt of select2"
+                                        (change)="onChange3($event.target.value)">
+                                        <option value="" disabled selected hidden>Choose a Product</option>
+                                        <option>{{elemnt.Id_Machine}}</option>
+                                    </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="exampleInputName" class="sr-only">Service</label>
-                                    <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded" id="rowcent">
-                                            <option value="" disabled selected hidden>Choose a Service</option>
-                                            <option>Production</option>
-                                            <option>Maintenance</option>
-                                            <option>Qualité</option>
-                                            <option>Lean</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="exampleInputName" class="sr-only">Function</label>
-                                    <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded" id="colcent">
-                                            <option value="" disabled selected hidden>Choose a Function</option>
-                                            <option>Directeur</option>
-                                            <option>Responsable</option>
-                                            <option>Ingénieur</option>
-                                            <option>Technicien</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </div>
                     </div>
                 </form>
                 <div class="col-xl-12 col-lg-7">

@@ -1,23 +1,13 @@
 body {
     height: auto;
     }
-#date{
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    border: 2px solid rgb(255, 255, 255);
-         width: 297px;
-         height: 35px;
-         margin-left: 320px;
-         background-color:transparent;color:rgb(182, 31, 31);
-         font-weight: bold;
-         font-size: 15px;
-    }
+
     #fpy{
         overflow:hidden;
         -webkit-border-radius:100px;
         -moz-border-radius:100px;
         border-radius:150px;
-        width:300px;
+        width:280px;
         height:300px;
         -moz-box-shadow: 0px 0px 10px #ffffff;
         -webkit-box-shadow: 0px 0px 10px #ffffff;
@@ -42,3 +32,55 @@ width: 350px;
     margin-right: 120px;
     width: 350px;
 }
+#dt2{
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 2px solid rgb(255, 255, 255);
+         width: 335px;
+         height: 35px;
+         background-color:transparent;
+         color:rgb(143, 245, 245);
+         font-weight: bold;
+         font-size: 15px;
+    }
+#dt1{
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 2px solid rgb(255, 255, 255);
+         width: 360px;
+         height: 35px;
+         background-color:transparent;
+         color:rgb(143, 245, 245);
+         font-weight: bold;
+         font-size: 15px;
+    }
+    #dt1{
+        margin-left: 50px;
+    }
+    #date{
+        background-color:transparent;
+        color: white;
+    }
+
+    #res, #res2, #res3{
+        margin-left: 70px;
+        margin-top: 50px;
+        color: rgb(201, 39, 39);
+        font-weight: bold;
+        font-size: 50px;
+    }
+    #res{
+
+        color: rgb(177, 177, 189);
+
+    }
+    #res2{
+    
+        color: rgb(201, 39, 39);
+     
+    }
+    #res3{
+    
+        color: rgb(255, 255, 255);
+     
+    }

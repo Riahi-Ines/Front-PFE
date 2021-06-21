@@ -28,9 +28,9 @@ export class UpdateUserComponent implements OnInit {
       firstname: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(10), Validators.pattern("[A-Z][A-Za-z'é]*")]),
       lastname: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern("[A-Z][A-Za-z 'é]*")]),
       email: new FormControl("", [Validators.required, Validators.email, Validators.pattern("^[a-z][a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@+asteelflash+.com")]),
-      photo: new FormControl("", [Validators.required,]),
-      service: new FormControl("", [Validators.required,]),
-      post: new FormControl("", [Validators.required,]),
+      photo: new FormControl(""),
+      service: new FormControl(""),
+      post: new FormControl(""),
     }
     this.modifyForm = builder.group(modifyformscontrol);
   }

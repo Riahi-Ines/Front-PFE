@@ -1,19 +1,39 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-
-import * as $ from 'jquery';
-
+import { AbbService } from '../../../../services/abb.service'
+import { HoneywellService } from '../../../../services/honeywell.service'
+import { ChartType, ChartOptions } from 'chart.js';
+import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 @Component({
-  selector: 'app-fpy',
+  selector: 'app-fpy',    
   templateUrl: './fpy.component.html',
   styleUrls: ['./fpy.component.css']
 })
 export class FpyComponent implements OnInit {
-
-  constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc) { }
-
+  public ABB1: any
+  public dateDebut: any
+  public dateFint: any
+  public results:any
+  public data:any
+  public select:any
+  public select2:any
+  public type:any
+  public type2:any
+  constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: AbbService ,private service2: HoneywellService) { 
+    monkeyPatchChartJsTooltip();
+    monkeyPatchChartJsLegend();
+  }
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  public pieChartLabels: Label[] = [ 'FPY'];
+  public pieChartData: SingleDataSet = [];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartPlugins = [];
+  public pieChartColors =['rgba(255, 20, 0, 1)'];
   ngOnInit(): void {
-    
+    this.pieChartData =[]
     var s1 = document.createElement("script");
     s1.type = "text/javascript";
     s1.src = "assets/js/jquery.min.js";
@@ -44,6 +64,109 @@ export class FpyComponent implements OnInit {
     s6.src = "assets/js/app-script.js";
     this.elementRef.nativeElement.appendChild(s6);
 
+   
+
   }
+
+  onChange(abb) {
+    this.ABB1 = abb
+    this.getListeABB()
+    this.getmachABB()
+  }
+  
+  dateDev(date) {
+    this.dateDebut = date.replace('T', ' ')
+  }
+
+  dateFin(date) {
+    this.dateFint = date.replace('T', ' ')
+  }
+
+  getListeABB() {
+     this.data = {
+      dateDebut :this.dateDebut,
+      dateFint:this.dateFint
+    }
+    if(this.ABB1 == 'ABB'){
+      this.service.getABB(this.data).subscribe((data) =>{
+        
+        this.select = data.recordset
+        console.log(this.select,'abbbbbbbbbbbbbbbb')
+
+      })
+    }else {
+      this.service2.getHONEYWELL(this.data).subscribe((data) =>{
+            
+             this.select = data.recordset
+
+         })
+
+    }
+
+ 
+  }
+
+
+  getmachABB() {
+    this.data = {
+     dateDebut :this.dateDebut,
+     dateFint:this.dateFint
+   }
+   if(this.ABB1 == 'ABB'){
+     this.service.getABBmachine(this.data).subscribe((data) =>{
+       
+       this.select2 = data.recordset
+       console.log(this.select2,'abbbbbbbbbbbbbbbb')
+
+     })
+   }else {
+     this.service2.getHONEYWELLmachine(this.data).subscribe((data) =>{
+           
+            this.select2 = data.recordset
+            console.log(this.select2,'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
+        })
+
+   }
+ 
+
+ }
+
+ onChange2 (data) {
+       this.type =data
+ }
+ onChange3 (data) {
+      this.type2 = data
+      this.getFPY()
+ }
+ getFPY() {
+  this.data = {
+   dateDebut :this.dateDebut,
+   dateFint:this.dateFint,
+   TypeTest :this.type,
+    Id_Machine:this.type2
+
+ }
+ if(this.ABB1 == 'ABB'){
+   this.service.getABBFPY(this.data).subscribe((data) =>{
+    this.pieChartData =[]
+    this.results = data.recordsets[0][0].Result
+    this.pieChartData.push(this.results)
+
+   })
+ }else {
+   this.service2.getHONEYWELLFPY(this.data).subscribe((data) =>{
+         this.results = data.recordsets[0][0].Result
+         this.pieChartData =[]
+         this.pieChartData.push(this.results)
+      })
+
+ }
+
+}
+
+
+
+
+
 
 }

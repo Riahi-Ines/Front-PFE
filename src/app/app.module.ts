@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/public/login/login.component';
 import { RegisterComponent } from './components/public/register/register.component';
 import { ResetComponent } from './components/public/reset/reset.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 import { ErrorComponent } from './components/public/error/error.component';
 import { UsersComponent } from './components/private/admin/users/users.component';
 import { FooterComponent } from './components/private/shared/footer/footer.component';
@@ -23,7 +25,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import{HttpClientModule} from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import { ChartsModule } from 'ng2-charts';
 
 import {
   ToastrModule,
@@ -62,9 +64,11 @@ import { UpdateUserComponent } from './components/private/admin/update-user/upda
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
+    ChartsModule,
     ToastNoAnimationModule.forRoot(),
     NgxPaginationModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,7 +1,6 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-dashboared',

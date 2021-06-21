@@ -55,7 +55,7 @@
                                             <td>{{user.post}}</td>
                                             <td>
                                                 <div class="d-grid gap-2 d-md-block">
-                                                    <button class="btn btn-warning btn-sm" (click)="['/update',user.id]"><i
+                                                    <button class="btn btn-warning btn-sm"[routerLink]="['/update',user.id]"><i
                                                             class="fa fa-edit"></i></button>
                                                     <button class="btn btn-danger mx-3" 
                                                         (click)="delete(user)"><i

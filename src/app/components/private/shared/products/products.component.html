@@ -17,21 +17,22 @@
             <div class="container-fluid">
 
                 <!--Start FPY Content-->
-                <form [formGroup]="fpyForm">
-                    <div class="col-xl-12 ">
+                <form>
+                    <div class="col-xl-12 col-lg-7">
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-group">
-                                    <label>
-                                        <div class="position-relative has-icon-right">
-                                            <input id="date" [readonly]="true" placeholder="Put a range DateTime "
-                                                [owlDateTimeTrigger]="dt10" [owlDateTime]="dt10" [selectMode]="'range'"formControlName="date">
-                                            <owl-date-time #dt10></owl-date-time>
-                                            <div *ngIf="date.touched && date.invalid" class="text-danger">
-                                                <div *ngIf="date.errors.required">* date is required</div>
-                                                <div *ngIf="date.errors.pattern">* required</div>
-                                            </div>
-                                        </div>
+                                    <label id="dt1">
+                                        Date Time From:
+                                        <input type="datetime-local" (change)="dateDev($event.target.value)" id="date" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label id="dt2">
+                                        Date Time To:
+                                        <input type="datetime-local" (change)="dateFin($event.target.value)" id="date" />
                                     </label>
                                 </div>
                             </div>
@@ -39,132 +40,98 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="exampleInputName" class="sr-only">Function</label>
+                                    <label for="exampleInputclient" class="sr-only">Client</label>
                                     <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded">
-                                            <option value="" disabled selected hidden>Choose a Function</option>
-                                            <option>Directeur</option>
-                                            <option>Responsable</option>
-                                            <option>Ingénieur</option>
-                                            <option>Technicien</option>
+                                        <select class="form-control form-control-rounded"
+                                            (change)="onChange($event.target.value)">
+                                            <option value="" disabled selected hidden>Choose a Client</option>
+                                            <option>HONEYWELL</option>
+                                            <option>ABB</option>
+                                            <option>SOMFY</option>
+                                            <option>BRANDT</option>
+                                            <option>FRESNUIS</option>
+                                            <option>MULLER</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="exampleInputName" class="sr-only">Function</label>
+                                    <label for="exampleInputline" class="sr-only">Line</label>
                                     <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded">
-                                            <option value="" disabled selected hidden>Choose a Function</option>
-                                            <option>Directeur</option>
-                                            <option>Responsable</option>
-                                            <option>Ingénieur</option>
-                                            <option>Technicien</option>
+                                        <select class="form-control form-control-rounded" *ngFor="let elemnt of select"
+                                            (change)="onChange2($event.target.value)">
+                                            <option value="" disabled selected hidden>Choose a TypeTest</option>
+                                            <option>{{elemnt.TypeTest}}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="exampleInputName" class="sr-only">Machine</label>
+                                    <label for="exampleInputprod" class="sr-only">Product</label>
                                     <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded">
-                                            <option value="" disabled selected hidden>Choose Machine</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
+                                        <select class="form-control form-control-rounded" *ngFor="let elemnt of select2"
+                                            (change)="onChange3($event.target.value)">
+                                            <option value="" disabled selected hidden>Choose an Id_Machine</option>
+                                            <option>{{elemnt.Id_Machine}}</option>
                                         </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="exampleInputName" class="sr-only">Service</label>
-                                    <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded" id="rowcent">
-                                            <option value="" disabled selected hidden>Choose a Service</option>
-                                            <option>Production</option>
-                                            <option>Maintenance</option>
-                                            <option>Qualité</option>
-                                            <option>Lean</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="exampleInputName" class="sr-only">Function</label>
-                                    <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded" id="colcent">
-                                            <option value="" disabled selected hidden>Choose a Function</option>
-                                            <option>Directeur</option>
-                                            <option>Responsable</option>
-                                            <option>Ingénieur</option>
-                                            <option>Technicien</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </form>
-                <div class="col-xl-12 col-lg-7">
-                    <div class="row mb-3">
-                        <div class="col">
-                            <div class="card shadow mb-4" id="fpy">
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="card-header">
-                                        <h6 class="m-0">Past good products
-                                        </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card shadow mb-4" id="fpy">
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="card-header">
-                                        <h6 class="m-0">Past good products
-                                        </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card shadow mb-4" id="fpy">
-                                <!-- Card Header - Dropdown -->
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="card-header">
-                                        <h6 class="m-0">Past good products
-                                        </h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                </div>
+                </form>
                 <div class="col-xl-12 col-lg-7">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold " style="font-size:16px;">Past good products Evolution
-                            </h6>
-
-                        </div>
-                        <!-- Card Body -->
-                        <div class="card-body" style="height:300px;">
-                            <div class="chart-area">
-                                <canvas id="myAreaChart"></canvas>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card shadow mb-4" id="fpy">
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="card-header">
+                                        <h6 class="m-0">Total products
+                                        </h6>
+                                    </div>
+                                    <div id="res">
+                                        {{results}}
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <div class="col">
+                            <div class="card shadow mb-4" id="fpy">
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="card-header">
+                                        <h6 class="m-0">First good products
+                                        </h6>
+                                    </div>
+                                    <div id="res2">
+                                        {{results2}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card shadow mb-4" id="fpy">
+                                <div class="card-body">
+                                    <div class="card-header">
+                                        <h6 class="m-0">Bad products
+                                        </h6>
+                                    </div>
+                                    <div id="res3">
+                                        {{results3}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-area">
+                        <div style="display: block;">
+                            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                                [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors"
+                                [legend]="pieChartLegend">
+                            </canvas>
                         </div>
                     </div>
                 </div>

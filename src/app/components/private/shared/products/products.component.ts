@@ -1,7 +1,11 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import * as $ from 'jquery';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
+import { AbbService } from '../../../../services/abb.service'
+import { HoneywellService } from '../../../../services/honeywell.service'
+import { ChartType, ChartOptions } from 'chart.js';
+import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
+
 
 @Component({
   selector: 'app-products',
@@ -9,17 +13,38 @@ import { FormControl, FormBuilder, FormGroup, Validator, Validators } from '@ang
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-
+  public dateDebut: any
+  public dateFint: any
+  public ABB1: any
+  public data: any
+  public select: any
+  public results2 :any
+  public select2: any
+  public type: any
+  public type2: any
+  public results3:any
+  public results: any
   public fpyForm: FormGroup;
-  constructor(builder: FormBuilder, private elementRef: ElementRef, @Inject(DOCUMENT) private doc) {
+  constructor(builder: FormBuilder, private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: AbbService, private service2: HoneywellService) {
+    monkeyPatchChartJsTooltip();
+    monkeyPatchChartJsLegend();
     let fpyformscontrol = {
-      date: new FormControl("", [Validators.required,Validators.pattern("^([1-9]|([012][0-9])|(3[01]))/([0]{0,1}[1-9]|1[012])/\d\d\d\d , [012]{0,1}[0-9]:[0-6][0-9] PM ~  $")]),
+      date: new FormControl("", [Validators.required, Validators.pattern("^([1-9]|([012][0-9])|(3[01]))/([0]{0,1}[1-9]|1[012])/\d\d\d\d , [012]{0,1}[0-9]:[0-6][0-9] PM ~  $")]),
       client: new FormControl("", [Validators.required,]),
-     
-      
+
+
     }
     this.fpyForm = builder.group(fpyformscontrol);
   }
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  public pieChartLabels: Label[] = [ 'FPY'];
+  public pieChartData: SingleDataSet = [];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartPlugins = [];
+  public pieChartColors =['rgba(255, 20, 0, 1)'];
 
   ngOnInit(): void {
     var s1 = document.createElement("script");
@@ -52,10 +77,114 @@ export class ProductsComponent implements OnInit {
     s6.src = "assets/js/app-script.js";
     this.elementRef.nativeElement.appendChild(s6);
   }
+
+  getListeABB() {
+    this.data = {
+      dateDebut: this.dateDebut,
+      dateFint: this.dateFint
+    }
+    if (this.ABB1 == 'ABB') {
+      this.service.getABB(this.data).subscribe((data) => {
+        this.select = data.recordset
+      })
+    } else {
+      this.service2.getHONEYWELL(this.data).subscribe((data) => {
+        this.select = data.recordset
+      })
+
+    }
+
+
+  }
+
+
+  getmachABB() {
+    this.data = {
+      dateDebut: this.dateDebut,
+      dateFint: this.dateFint
+    }
+    if (this.ABB1 == 'ABB') {
+      this.service.getABBmachine(this.data).subscribe((data) => {
+        this.select2 = data.recordset
+
+      })
+    } else {
+      this.service2.getHONEYWELLmachine(this.data).subscribe((data) => {
+        this.select2 = data.recordset
+      })
+
+    }
+
+
+  }
+
+  onChange(abb) {
+
+    this.ABB1 = abb
+    this.getListeABB()
+    this.getmachABB()
+  }
+
+  onChange2(data) {
+    this.type = data
+  }
+  onChange3(data) {
+    this.type2 = data
+    this.gettotal()
+  }
+  gettotal() {
+    this.data = {
+      dateDebut: this.dateDebut,
+      dateFint: this.dateFint,
+      TypeTest: this.type,
+      Id_Machine: this.type2
+
+    }
+    if (this.ABB1 == 'ABB') {
+        this.service.getABBTotalprod(this.data).subscribe((data) => {
+        this.results = data.recordset[0].total
+      })
+      this.service.getABBfirstprod(this.data).subscribe((data) =>{
+        this.results2 =  data.recordset[0].perpassage
+      })
+      this.service.getABBbadprod(this.data).subscribe((data) =>{
+        this.results3 = data.recordset[0].total
+      })
+    } else {
+      this.service2.getHONEYWELLtotal(this.data).subscribe((data) => {
+        this.results = data.recordset[0].total
+
+      })
+      this.service2.getHONEYWELLfirst(this.data).subscribe((data) => {
+        this.results2 = data.recordset[0].perpassage
+
+      })
+
+      this.service2.getHONEYWELLbad(this.data).subscribe((data) =>{
+        this.results3 = data.recordset[0].totalbad
+        console.log(data,'dee')
+      })
+
+    }
+
+  }
+  dateDev(date) {
+
+
+    this.dateDebut = date.replace('T', ' ')
+
+  }
+
+
+  dateFin(date) {
+
+    this.dateFint = date.replace('T', ' ')
+  }
   get date() { return this.fpyForm.get('date') }
   get client() { return this.fpyForm.get('client') }
-  
+
   fpy() {
     console.log(this.fpyForm.value)
   }
+
 }

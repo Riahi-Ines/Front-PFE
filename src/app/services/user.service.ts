@@ -78,4 +78,5 @@ export class UserService {
     let dataFormaAPI = this.http.post<any>(this.singinUserUrl, dataFormSigninForm)
     return dataFormaAPI
   }
+  
 }

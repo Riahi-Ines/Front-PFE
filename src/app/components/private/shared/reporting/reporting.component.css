@@ -50,3 +50,32 @@
 		transform: rotateY(360deg);
 	}
 }
+#dt2{
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 2px solid rgb(255, 255, 255);
+         width: 335px;
+         height: 35px;
+         background-color:transparent;
+         color:rgb(143, 245, 245);
+         font-weight: bold;
+         font-size: 15px;
+    }
+#dt1{
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 2px solid rgb(255, 255, 255);
+         width: 360px;
+         height: 35px;
+         background-color:transparent;
+         color:rgb(143, 245, 245);
+         font-weight: bold;
+         font-size: 15px;
+    }
+    #dt1{
+        margin-left: 50px;
+    }
+    #date{
+        background-color:transparent;
+        color: white;
+    }

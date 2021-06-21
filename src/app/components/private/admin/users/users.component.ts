@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import {MatDialog,MatDialogConfig} from "@angular/material/dialog";
 import { UpdateUserComponent } from '../update-user/update-user.component';
+import { User } from 'src/app/models/user';
 
 
 @Component({

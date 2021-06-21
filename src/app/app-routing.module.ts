@@ -17,12 +17,12 @@ import { ResetComponent } from './components/public/reset/reset.component';
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "error",
+    redirectTo: "login",
     pathMatch: "full"
   },
   {
-    path: "error",
-    component:ErrorComponent
+    path: "login",
+    component:LoginComponent
   },
   {
     path: "login",

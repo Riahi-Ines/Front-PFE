@@ -1,17 +1,7 @@
 body {
     height: auto;
     }
-#date{
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    border: 2px solid rgb(255, 255, 255);
-         width: 297px;
-         height: 35px;
-         margin-left: 320px;
-         background-color:transparent;color:rgb(182, 31, 31);
-         font-weight: bold;
-         font-size: 15px;
-    }
+
     #fpy{
         overflow:hidden;
         -webkit-border-radius:400px;
@@ -33,10 +23,51 @@ body {
        font-size: 18px !important;
     }
 #rowcent{
-  margin-left: 120px;
-width: 350px;
+    margin-left: 120px;   
+    width: 350px;
 }
 #colcent{
     margin-right: 120px;
     width: 350px;
 }
+#dt1,#dt2{
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 2px solid rgb(255, 255, 255);
+         width: 320px;
+         height: 35px;
+         background-color:transparent;
+         color:rgb(143, 245, 245);
+         font-weight: bold;
+         font-size: 15px;
+    }
+    #dt1{
+        margin-left: 50px;
+    }
+    #date{
+        background-color:transparent;
+        color: white;
+    }
+
+    #dt2{
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        border: 2px solid rgb(255, 255, 255);
+             width: 335px;
+             height: 35px;
+             background-color:transparent;
+             color:rgb(143, 245, 245);
+             font-weight: bold;
+             font-size: 15px;
+        }
+    #dt1{
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        border: 2px solid rgb(255, 255, 255);
+             width: 360px;
+             height: 35px;
+             background-color:transparent;
+             color:rgb(143, 245, 245);
+             font-weight: bold;
+             font-size: 15px;
+        }

@@ -21,32 +21,35 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-group">
-                                    <label>
-                                        <div class="position-relative has-icon-right">
-                                            <input [owlDateTime]="dt2" placeholder="Date Time">
-                                            <span [owlDateTimeTrigger]="dt2"><i class="fa fa-calendar"></i></span>
-                                            <owl-date-time #dt2></owl-date-time>
-                                        </div>
+                                    <label id="dt1">
+                                        Date Time From:
+                                        <input type="datetime-local" (change)="dateDev($event.target.value)"id="date" />
                                     </label>
                                 </div>
                             </div>
                             <div class="col">
-                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"style="margin-left:210px;height:30px"> Generate
-                                Report</a>
-                        </div></div>
+                                <div class="form-group">
+                                    <label id="dt2">
+                                        Date Time To:
+                                        <input type="datetime-local" (change)="dateFin($event.target.value)" id="date"/>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="exampleInputclient" class="sr-only">Client</label>
                                     <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded">
+                                        <select class="form-control form-control-rounded"
+                                            (change)="onChange($event.target.value)">
                                             <option value="" disabled selected hidden>Choose a Client</option>
-                                            <option>Hager Client</option>
-                                            <option>ABB Client</option>
-                                            <option>SOMFY Client</option>
-                                            <option>BRANDT Client</option>
-                                            <option>FRESNUIS Client</option>
-                                            <option>MULLER Client</option>
+                                            <option>HONEYWELL</option>
+                                            <option>ABB</option>
+                                            <option>SOMFY</option>
+                                            <option>BRANDT</option>
+                                            <option>FRESNUIS</option>
+                                            <option>MULLER</option>
                                         </select>
                                     </div>
                                 </div>
@@ -55,12 +58,10 @@
                                 <div class="form-group">
                                     <label for="exampleInputline" class="sr-only">Line</label>
                                     <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded">
+                                        <select class="form-control form-control-rounded" *ngFor="let elemnt of select"
+                                            (change)="onChange2($event.target.value)">
                                             <option value="" disabled selected hidden>Choose a production line</option>
-                                            <option>Line 1</option>
-                                            <option>Line 2</option>
-                                            <option>Line 3</option>
-                                            <option>Line 4</option>
+                                            <option>{{elemnt.TypeTest}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -69,24 +70,21 @@
                                 <div class="form-group">
                                     <label for="exampleInputprod" class="sr-only">Product</label>
                                     <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded">
+                                        <select class="form-control form-control-rounded" *ngFor="let elemnt of select2"
+                                            (change)="onChange3($event.target.value)">
                                             <option value="" disabled selected hidden>Choose a Product</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
+                                            <option>{{elemnt.Id_Machine}}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                       
+
                     </div>
                 </form>
                 <div class="col-xl-12 col-lg-7">
-                    <div class="card shadow mb-4"id="fpy">
+                    <div class="card shadow mb-4" id="fpy">
                         <!-- Card Header - Dropdown -->
-                      
                         <!-- Card Body -->
                         <div class="card-body">
                             <div class="card-body">
@@ -94,24 +92,20 @@
                                     <h6 class="m-0">First Pass Yield Percent
                                     </h6>
                                 </div>
+                                <div id="res">
+                                    {{results}}%
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-12 col-lg-7">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold " style="font-size:16px;">First Pass Yield Evolution
-                            </h6>
-
-                        </div>
-                        <!-- Card Body -->
-                        <div class="card-body" style="height:300px;">
-                            <div class="chart-area">
-                                <canvas id="myAreaChart"></canvas>
-                            </div>
-                        </div>
+                <div class="chart-area">
+                    <div style="display: block;">
+                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors"
+                            [legend]="pieChartLegend">
+                        </canvas>
                     </div>
                 </div>
 

@@ -1,4 +1,10 @@
-
+.container{
+  margin-top: 100px;
+}
+#body{
+  width: 900px;
+  margin-left: 180px;
+}
   #avatar{
     overflow:hidden;
     -webkit-border-radius:160px;
