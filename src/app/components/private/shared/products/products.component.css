@@ -1,7 +1,9 @@
 body {
     height: auto;
     }
-
+.chart-area{
+    margin-top: 60px;
+}
     #fpy{
         overflow:hidden;
         -webkit-border-radius:100px;

@@ -58,10 +58,10 @@
                                 <div class="form-group">
                                     <label for="exampleInputline" class="sr-only">Line</label>
                                     <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded" *ngFor="let elemnt of select"
-                                            (change)="onChange2($event.target.value)">
-                                            <option value="" disabled selected hidden>Choose a production line</option>
-                                            <option>{{elemnt.TypeTest}}</option>
+                                        <select class="form-control form-control-rounded" (change)="onChange2($event.target.value)" *ngFor="let elemnt of select" >
+                                            <option value="Choose a production line" disabled selected hidden>Choose a production line</option>
+                                            <option   
+                                            >{{elemnt.TypeTest}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -70,10 +70,10 @@
                                 <div class="form-group">
                                     <label for="exampleInputprod" class="sr-only">Product</label>
                                     <div class="position-relative has-icon-right">
-                                        <select class="form-control form-control-rounded" *ngFor="let elemnt of select2"
-                                            (change)="onChange3($event.target.value)">
-                                            <option value="" disabled selected hidden>Choose a Product</option>
-                                            <option>{{elemnt.Id_Machine}}</option>
+                                        <select  class="form-control form-control-rounded" (change)="onChange3($event.target.value)" *ngFor="let elemnt of select2" >
+                                            <option value="Choose an Id-Machin" disabled selected hidden>Choose an Id-Machine</option>
+                                            <option   
+                                            >{{elemnt.Id_Machine}}</option>
                                         </select>
                                     </div>
                                 </div>

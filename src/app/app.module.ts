@@ -26,6 +26,7 @@ import{HttpClientModule} from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ChartsModule } from 'ng2-charts';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import {
   ToastrModule,
@@ -65,6 +66,7 @@ import { UpdateUserComponent } from './components/private/admin/update-user/upda
     ReactiveFormsModule,
     HttpClientModule,
     ChartsModule,
+    NgxChartsModule,
     ToastNoAnimationModule.forRoot(),
     NgxPaginationModule,
     MatDialogModule,

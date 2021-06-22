@@ -3,7 +3,6 @@ import { DOCUMENT } from '@angular/common';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 import { AbbService } from '../../../../services/abb.service'
 import { HoneywellService } from '../../../../services/honeywell.service'
-import { ChartType, ChartOptions } from 'chart.js';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 
 
@@ -22,29 +21,35 @@ export class ProductsComponent implements OnInit {
   public select2: any
   public type: any
   public type2: any
-  public results3:any
-  public results: any
+  public results3 :any 
+  public results:any
   public fpyForm: FormGroup;
+  public single =[];
+  multi: any[];
+  view: any[] = [700, 400]
+  // options
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Products Type ';
+  showYAxisLabel = true;
+  yAxisLabel = 'Products Number';
+  colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
+
   constructor(builder: FormBuilder, private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: AbbService, private service2: HoneywellService) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
     let fpyformscontrol = {
       date: new FormControl("", [Validators.required, Validators.pattern("^([1-9]|([012][0-9])|(3[01]))/([0]{0,1}[1-9]|1[012])/\d\d\d\d , [012]{0,1}[0-9]:[0-6][0-9] PM ~  $")]),
       client: new FormControl("", [Validators.required,]),
-
-
     }
     this.fpyForm = builder.group(fpyformscontrol);
   }
-  public pieChartOptions: ChartOptions = {
-    responsive: true,
-  };
-  public pieChartLabels: Label[] = [ 'FPY'];
-  public pieChartData: SingleDataSet = [];
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartPlugins = [];
-  public pieChartColors =['rgba(255, 20, 0, 1)'];
+
 
   ngOnInit(): void {
     var s1 = document.createElement("script");
@@ -131,6 +136,7 @@ export class ProductsComponent implements OnInit {
   onChange3(data) {
     this.type2 = data
     this.gettotal()
+
   }
   gettotal() {
     this.data = {
@@ -143,29 +149,63 @@ export class ProductsComponent implements OnInit {
     if (this.ABB1 == 'ABB') {
         this.service.getABBTotalprod(this.data).subscribe((data) => {
         this.results = data.recordset[0].total
+        this.service.getABBfirstprod(this.data).subscribe((data) =>{
+          this.results2 =  data.recordset[0].perpassage
+          this.service.getABBbadprod(this.data).subscribe((data) =>{
+            this.results3 = data.recordset[0].total
+          this.single =[{
+            name:"TotalProd",
+            value:this.results
+          },
+          {
+            name:"FirstProd",
+            value:this.results2
+          },
+          {
+            name:"BadProd",
+            value:this.results3
+          }
+        ]
+        console.log(this.single)
+          })
+        })
+      
       })
-      this.service.getABBfirstprod(this.data).subscribe((data) =>{
-        this.results2 =  data.recordset[0].perpassage
-      })
-      this.service.getABBbadprod(this.data).subscribe((data) =>{
-        this.results3 = data.recordset[0].total
-      })
-    } else {
+    
+   
+      
+    } else{
       this.service2.getHONEYWELLtotal(this.data).subscribe((data) => {
-        this.results = data.recordset[0].total
-
+      this.results = data.recordset[0].total
+      this.service2.getHONEYWELLfirst(this.data).subscribe((data) =>{
+        this.results2 =  data.recordset[0].perpassage
+        this.service2.getHONEYWELLbad(this.data).subscribe((data) =>{
+        this.results3 = data.recordset[0].total
+        this.single =[{
+          name:"TotalProd",
+          value:this.results
+        },
+        {
+          name:"FirstProd",
+          value:this.results2
+        },
+        {
+          name:"BadProd",
+          value:this.results3
+        }
+      ]
+      console.log(this.single)
+        })
       })
-      this.service2.getHONEYWELLfirst(this.data).subscribe((data) => {
-        this.results2 = data.recordset[0].perpassage
-
-      })
-
-      this.service2.getHONEYWELLbad(this.data).subscribe((data) =>{
-        this.results3 = data.recordset[0].totalbad
-        console.log(data,'dee')
-      })
-
-    }
+    
+      
+    
+      
+    })
+  
+ 
+    
+  } 
 
   }
   dateDev(date) {
@@ -185,6 +225,11 @@ export class ProductsComponent implements OnInit {
 
   fpy() {
     console.log(this.fpyForm.value)
+  }
+
+
+  onSelect(event) {
+    console.log(event);
   }
 
 }

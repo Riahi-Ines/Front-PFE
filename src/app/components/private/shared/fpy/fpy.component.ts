@@ -15,10 +15,10 @@ export class FpyComponent implements OnInit {
   public dateFint: any
   public results:any
   public data:any
-  public select:any
-  public select2:any
-  public type:any
-  public type2:any
+  public select:Array<string>
+  public select2:Array<string>
+  public type:string
+  public type2:string
   constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: AbbService ,private service2: HoneywellService) { 
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
@@ -26,12 +26,16 @@ export class FpyComponent implements OnInit {
   public pieChartOptions: ChartOptions = {
     responsive: true,
   };
-  public pieChartLabels: Label[] = [ 'FPY'];
+  public pieChartLabels: Label[] = [ 'FPY','REST'];
   public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
-  public pieChartColors =['rgba(255, 20, 0, 1)'];
+  public pieChartColors = [
+    {
+      backgroundColor: [],
+    },
+  ];
   ngOnInit(): void {
     this.pieChartData =[]
     var s1 = document.createElement("script");
@@ -68,12 +72,20 @@ export class FpyComponent implements OnInit {
 
   }
 
-  onChange(abb) {
-    this.ABB1 = abb
-    this.getListeABB()
-    this.getmachABB()
-  }
+ 
+  // recherch() {
+    
+  // }
   
+ onChange2 (data) {
+  console.log(data,'ssss')
+      this.type =data
+}
+onChange3 (data) {
+     this.type2 = data
+     this.getFPY()
+     
+}
   dateDev(date) {
     this.dateDebut = date.replace('T', ' ')
   }
@@ -82,6 +94,7 @@ export class FpyComponent implements OnInit {
     this.dateFint = date.replace('T', ' ')
   }
 
+
   getListeABB() {
      this.data = {
       dateDebut :this.dateDebut,
@@ -89,23 +102,14 @@ export class FpyComponent implements OnInit {
     }
     if(this.ABB1 == 'ABB'){
       this.service.getABB(this.data).subscribe((data) =>{
-        
         this.select = data.recordset
-        console.log(this.select,'abbbbbbbbbbbbbbbb')
-
       })
     }else {
       this.service2.getHONEYWELL(this.data).subscribe((data) =>{
-            
              this.select = data.recordset
-
          })
-
     }
-
- 
   }
-
 
   getmachABB() {
     this.data = {
@@ -114,36 +118,24 @@ export class FpyComponent implements OnInit {
    }
    if(this.ABB1 == 'ABB'){
      this.service.getABBmachine(this.data).subscribe((data) =>{
-       
        this.select2 = data.recordset
-       console.log(this.select2,'abbbbbbbbbbbbbbbb')
-
      })
    }else {
      this.service2.getHONEYWELLmachine(this.data).subscribe((data) =>{
-           
             this.select2 = data.recordset
-            console.log(this.select2,'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
         })
-
    }
  
 
  }
 
- onChange2 (data) {
-       this.type =data
- }
- onChange3 (data) {
-      this.type2 = data
-      this.getFPY()
- }
+
  getFPY() {
   this.data = {
    dateDebut :this.dateDebut,
    dateFint:this.dateFint,
    TypeTest :this.type,
-    Id_Machine:this.type2
+  Id_Machine:this.type2
 
  }
  if(this.ABB1 == 'ABB'){
@@ -151,6 +143,9 @@ export class FpyComponent implements OnInit {
     this.pieChartData =[]
     this.results = data.recordsets[0][0].Result
     this.pieChartData.push(this.results)
+    this.pieChartData.push(100-this.results)
+    var color = "#"+((1<<24)*Math.random()|0).toString(16);
+        this.pieChartColors[0]['backgroundColor'].unshift(color)
 
    })
  }else {
@@ -158,6 +153,9 @@ export class FpyComponent implements OnInit {
          this.results = data.recordsets[0][0].Result
          this.pieChartData =[]
          this.pieChartData.push(this.results)
+         this.pieChartData.push(100-this.results)
+         var color = "#"+((1<<24)*Math.random()|0).toString(16);
+         this.pieChartColors[0]['backgroundColor'].unshift(color)
       })
 
  }
@@ -165,7 +163,14 @@ export class FpyComponent implements OnInit {
 }
 
 
+onChange(abb) {
+  this.ABB1 = abb
+  this.getListeABB()
+  this.getmachABB()
 
+  
+
+}
 
 
 

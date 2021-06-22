@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { AbbService } from '../../../../services/abb.service'
 import { HoneywellService } from '../../../../services/honeywell.service'
+import { ChartType, ChartOptions } from 'chart.js';
+import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 
 @Component({
   selector: 'app-defects',
@@ -9,20 +11,37 @@ import { HoneywellService } from '../../../../services/honeywell.service'
   styleUrls: ['./defects.component.css']
 })
 export class DefectsComponent implements OnInit {
+  p: number = 1;
   public dateDebut: any
   public dateFint: any
   public ABB1: any
   public data: any
   public select: any
-  public results2 :any
+  public results2 :any;
   public select2: any
   public type: any
   public type2: any
   public results3:any
   public results: any
 
-  constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: AbbService, private service2: HoneywellService) { }
-
+  constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: AbbService, 
+  private service2: HoneywellService) {
+    monkeyPatchChartJsTooltip();
+    monkeyPatchChartJsLegend();
+   }
+   public pieChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  public pieChartLabels: Label[] = [ 'FPY','rest'];
+  public pieChartData: SingleDataSet = [];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartPlugins = [];
+  public pieChartColors = [
+    {
+      backgroundColor: [],
+    },
+  ];
   ngOnInit(): void {
     var s1 = document.createElement("script");
     s1.type = "text/javascript";
@@ -71,10 +90,7 @@ export class DefectsComponent implements OnInit {
       })
 
     }
-
-
   }
-
 
   getmachABB() {
     this.data = {
@@ -105,6 +121,11 @@ export class DefectsComponent implements OnInit {
     this.type = data
   }
 
+  onChange3(data){
+    this.type2 = data
+    this.getResult();
+  }
+
   dateDev(date) {
 
 
@@ -117,5 +138,34 @@ export class DefectsComponent implements OnInit {
 
     this.dateFint = date.replace('T', ' ')
   }
+  getResult () {
+    this.data = {
+      dateDebut :this.dateDebut,
+      dateFint:this.dateFint,
+      TypeTest :this.type,
+     Id_Machine:this.type2
+   
+    }
+    if(this.ABB1 == 'ABB') {
+      this.service.getABBtop5(this.data).subscribe((res) =>{
+        this.results = res.data[0]
+        this.service.getABBdef(this.data).subscribe((res) =>{
+          this.results2 = res.data[0]
+        })
+        
+    })
+    }else {
+      this.service2.getHONEYWELLtop5(this.data).subscribe((res) =>{
+        this.results = res.data[0]
+        this.service2.getHONEYWELLdef(this.data).subscribe((res) =>{
+          this.results2 = res.data[0]
+          console.log(this.results2)
+        })
+    })
+    }
+ 
+  }
 
 }
+
+

@@ -24,7 +24,8 @@
                                 <div class="form-group">
                                     <label id="dt1">
                                         Date Time From:
-                                        <input type="datetime-local" (change)="dateDev($event.target.value)" id="date" />
+                                        <input type="datetime-local" (change)="dateDev($event.target.value)"
+                                            id="date" />
                                     </label>
                                 </div>
                             </div>
@@ -32,7 +33,8 @@
                                 <div class="form-group">
                                     <label id="dt2">
                                         Date Time To:
-                                        <input type="datetime-local" (change)="dateFin($event.target.value)" id="date" />
+                                        <input type="datetime-local" (change)="dateFin($event.target.value)"
+                                            id="date" />
                                     </label>
                                 </div>
                             </div>
@@ -128,10 +130,11 @@
                     </div>
                     <div class="chart-area">
                         <div style="display: block;">
-                            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-                                [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors"
-                                [legend]="pieChartLegend">
-                            </canvas>
+                            <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single"
+                                [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
+                                [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                                [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+                            </ngx-charts-bar-vertical>
                         </div>
                     </div>
                 </div>

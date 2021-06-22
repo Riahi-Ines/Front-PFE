@@ -3597,9 +3597,6 @@ table.grid td {
   .right-nav-link a.nav-link{
     padding-right: .0rem !important;
   }
-  pieChartColors{
-      color: rgba(255, 20, 0, 1) !important;
-  }
 
   .topbar-nav .navbar {
     padding: 0px 10px 0 5px;
