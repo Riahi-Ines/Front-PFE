@@ -67,22 +67,21 @@ width: 350px;
     #res, #res2, #res3{
         margin-left: 70px;
         margin-top: 50px;
-        color: rgb(201, 39, 39);
         font-weight: bold;
         font-size: 50px;
     }
     #res{
 
-        color: rgb(177, 177, 189);
+        color: #5AA454;
 
     }
     #res2{
     
-        color: rgb(201, 39, 39);
+        color: #A10A28;
      
     }
     #res3{
     
-        color: rgb(255, 255, 255);
+        color: #C7B42C;
      
     }

@@ -93,7 +93,7 @@
                                 <div style="margin-left: 20px;height: 54px;" *ngFor="let element of results">
                                     <h4 class="small font-weight-bold">{{element.Nom_Mesure}}&nbsp; &nbsp;&nbsp;{{element.quantite}}</h4>
                                     <div class="progress"style="margin-top:-10px">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 50%" [attr.aria-valuenow]="element.quantite"></div>
+                                        <div class="progress-bar bg-warning" role="progressbar"   [ngStyle]="{'width' : element.quantite + '%' }" [attr.aria-valuenow]="element.quantite"></div>
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +172,14 @@
                         <!-- Card Body -->
                         <div class="card-body" style="height:300px;">
                             <div class="chart-area">
-                                <canvas id="myAreaChart"></canvas>
+                                <canvas baseChart 
+                                [datasets]="lineChartData"
+                                [labels]="lineChartLabels"
+                                [colors]="lineChartColors"
+                                [legend]="lineChartLegend"
+                                [chartType]="lineChartType"
+                                [plugins]="lineChartPlugins">
+                              </canvas>
                             </div>
                         </div>
                     </div>

@@ -27,7 +27,8 @@
                                 <div class="form-group">
                                     <label id="dt1">
                                         Date Time From:
-                                        <input type="datetime-local" (change)="dateDev($event.target.value)" id="date" />
+                                        <input type="datetime-local" (change)="dateDev($event.target.value)"
+                                            id="date" />
                                     </label>
                                 </div>
                             </div>
@@ -35,7 +36,8 @@
                                 <div class="form-group">
                                     <label id="dt2">
                                         Date Time To:
-                                        <input type="datetime-local" (change)="dateFin($event.target.value)" id="date" />
+                                        <input type="datetime-local" (change)="dateFin($event.target.value)"
+                                            id="date" />
                                     </label>
                                 </div>
                             </div>
@@ -48,12 +50,8 @@
                                         <select class="form-control form-control-rounded"
                                             (change)="onChange($event.target.value)">
                                             <option value="" disabled selected hidden>Choose a Client</option>
-                                            <option>HONEYWELL</option>
                                             <option>ABB</option>
-                                            <option>SOMFY</option>
-                                            <option>BRANDT</option>
-                                            <option>FRESNUIS</option>
-                                            <option>MULLER</option>
+                                            <option>HONEYWELL</option>
                                         </select>
                                     </div>
                                 </div>
@@ -94,19 +92,18 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <strong>FPY : </strong><strong></strong>
+                                                <strong>FPY:</strong> &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<strong> {{results}}%</strong>
                                             </td>
                                             <td>
-                                                <strong>Total Products</strong><strong></strong>
+                                                <strong style="margin-left: -100px;">Total Products:</strong>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<strong>{{results2}}</strong>
                                             </td>
-
                                         </tr>
                                         <tr>
                                             <td>
-                                                <strong>Good Products</strong><strong></strong>
+                                                <strong>Good Products passed on the first try</strong>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<strong>{{results3}}</strong>
                                             </td>
                                             <td>
-                                                <strong>Good Products passed on the first try</strong><strong></strong>
+                                                <strong style="margin-left: -100px;">Bad Products</strong>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<strong>{{results4}}</strong>
                                             </td>
                                         </tr>
 
@@ -116,75 +113,40 @@
                             <!-- Content Column -->
                         </div>
                         <div class="row">
-                            <div class="col-lg-12 ">
-                                <!-- Project Card Example -->
-                                <div class="card shadow ">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold" style="font-size:16px;">TOP 5 Defects
-                                        </h6>
-                                    </div>
-                                    <div class="card-body" style="height:245px;">
-                                        <h4 class="small font-weight-bold"><span class="float-right"></span>
-                                        </h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-danger" role="progressbar"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold"><span class="float-right"></span>
-                                        </h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-warning" role="progressbar"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold"> <span class="float-right"></span>
-                                        </h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar" role="progressbar"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold"> <span class="float-right"></span>
-                                        </h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-info" role="progressbar"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold"><span class="float-right"></span>
-                                        </h4>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar"></div>
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title font-weight-bold">TOP5 Defects</h5>
+                                        <div class="table-responsive table-hover">
+                                            <table  class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col font-weight-bold" >Defects</th>
+                                                        <th scope="col font-weight-bold">Quantity</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let element of results5">
+                                                        <td>{{element.Nom_Mesure}}</td>
+                                                        <td>{{element.quantite}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Content evo + camb -->
                         <div class="row">
-                            <!-- evolution horaire -->
-                            <div class="col-xl-8 col-lg-7 ">
-                                <div class="card shadow mb-4">
-                                    <!-- Card Header - Dropdown -->
-                                    <div
-                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold" style="font-size:16px;">Evolution
-                                            horaire defauts
-                                        </h6>
-
-                                    </div>
-                                    <!-- Card Body -->
-                                    <div class="card-body" style="height:269px;">
-                                        <div class="chart-area">
-                                            <canvas id="myAreaChart"></canvas>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
                             <!-- Pie Chart -->
-                            <div class="col-xl-4 col-lg-5">
+                            <div class="col-xl-8 col-lg-10">
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
                                     <div
                                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold " style="font-size:16px;">camember
-                                            defauts</h6>
-
+                                        <h6 class="m-0 font-weight-bold " style="font-size:16px;">TOP5
+                                        </h6>
                                     </div>
                                     <!-- Card Body -->
                                     <div class="card-body">
@@ -201,29 +163,6 @@
                                             <span class="mr-2">
                                                 <i class="fas fa-circle text-info"></i>
                                             </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Content Row -->
-                        <div class="row">
-
-                            <div class="col-xl-8 col-lg-7">
-                                <div class="card shadow mb-4">
-                                    <!-- Card Header - Dropdown -->
-                                    <div
-                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold" style="font-size:16px;">Evolution
-                                            horaire defauts
-                                        </h6>
-
-                                    </div>
-                                    <!-- Card Body -->
-                                    <div class="card-body" style="height:269px;">
-                                        <div class="chart-area">
-                                            <canvas id="myAreaChart"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -245,6 +184,35 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title font-weight-bold">Defects List</h5>
+                                        <div class="table-responsive table-hover">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col font-weight-bold">Defects</th>
+                                                        <th scope="col font-weight-bold">Quantity</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let element of results6 | paginate: { itemsPerPage: 10, currentPage: p };let i = index">
+                                                        <th scope="row">{{i+1}}</th>
+                                                        <td>{{element.Nom_Mesure}}</td>
+                                                        <td>{{element.quantite}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>

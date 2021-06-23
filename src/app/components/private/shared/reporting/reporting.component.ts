@@ -8,6 +8,7 @@ import { HoneywellService } from '../../../../services/honeywell.service'
   styleUrls: ['./reporting.component.css']
 })
 export class ReportingComponent implements OnInit {
+  p: number = 1;
   public dateDebut: any
   public dateFint: any
   public ABB1: any
@@ -19,6 +20,9 @@ export class ReportingComponent implements OnInit {
   public type2: any
   public results3:any
   public results: any
+  public results4: any
+  public results5: any
+  public results6: any
   constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc,private service: AbbService, private service2: HoneywellService) { }
 
   ngOnInit(): void {
@@ -70,8 +74,6 @@ export class ReportingComponent implements OnInit {
       })
 
     }
-
-
   }
 
 
@@ -89,7 +91,6 @@ export class ReportingComponent implements OnInit {
       this.service2.getHONEYWELLmachine(this.data).subscribe((data) => {
         this.select2 = data.recordset
       })
-
     }
   }
 
@@ -110,13 +111,69 @@ export class ReportingComponent implements OnInit {
     this.dateDebut = date.replace('T', ' ')
 
   }
-
+  onChange3 (data) {
+    this.type2 = data
+    this.getFPY()
+}
 
   dateFin(date) {
 
     this.dateFint = date.replace('T', ' ')
   }
-
+  getFPY() {
+    this.data = {
+     dateDebut :this.dateDebut,
+     dateFint:this.dateFint,
+     TypeTest :this.type,
+    Id_Machine:this.type2
+  
+   }
+   if(this.ABB1 == 'ABB'){
+     this.service.getABBFPY(this.data).subscribe((data) =>{
+      this.results = data.recordsets[0][0].Result
+      this.service.getABBTotalprod(this.data).subscribe((data) => {
+        this.results2 = data.recordset[0].total
+        console.log(this.results2)
+      this.service.getABBfirstprod(this.data).subscribe((data) =>{
+        this.results3 =  data.recordset[0].perpassage
+        this.service.getABBbadprod(this.data).subscribe((data) =>{
+          this.results4 = data.recordset[0].total
+          this.service.getABBtop5(this.data).subscribe((res) =>{
+            this.results5 = res.data[0]
+            this.service.getABBdef(this.data).subscribe((res) =>{
+              this.results6 = res.data[0]
+            })
+            
+        })
+      })
+    
+    })
+  })
+  
+     })
+   }else {
+     this.service2.getHONEYWELLFPY(this.data).subscribe((data) =>{
+           this.results = data.recordsets[0][0].Result
+           this.service2.getHONEYWELLtotal(this.data).subscribe((data) => {
+            this.results2 = data.recordset[0].total
+           this.service2.getHONEYWELLfirst(this.data).subscribe((data) =>{
+            this.results3 =  data.recordset[0].perpassage
+            this.service2.getHONEYWELLbad(this.data).subscribe((data) =>{
+            this.results4 = data.recordset[0].total 
+            this.service2.getHONEYWELLtop5(this.data).subscribe((res) =>{
+              this.results5 = res.data[0]
+              this.service2.getHONEYWELLdef(this.data).subscribe((res) =>{
+                this.results6 = res.data[0]
+              })
+          })
+          })
+          })
+        })
+      })
+  
+   }
+  
+  }
 
   print(){
     window.print()

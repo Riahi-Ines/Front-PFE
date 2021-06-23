@@ -2,8 +2,8 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { AbbService } from '../../../../services/abb.service'
 import { HoneywellService } from '../../../../services/honeywell.service'
-import { ChartType, ChartOptions } from 'chart.js';
-import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
+import { ChartType, ChartOptions,ChartDataSets } from 'chart.js';
+import { SingleDataSet, Label,Color, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 
 @Component({
   selector: 'app-defects',
@@ -32,16 +32,35 @@ export class DefectsComponent implements OnInit {
    public pieChartOptions: ChartOptions = {
     responsive: true,
   };
-  public pieChartLabels: Label[] = [ 'FPY','rest'];
+  public pieChartLabels: Label[] = [ 'FPY','rest','dd','zz','aa'];
   public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
   public pieChartColors = [
     {
-      backgroundColor: [],
+      backgroundColor: ['white','red','green','yellow','pink'],
     },
   ];
+
+
+  public lineChartData: ChartDataSets[] = [
+    { data: [], label: 'Series A' },
+  ];
+  public lineChartLabels: Label[] = [];
+ 
+  public lineChartColors: Color[] = [
+    {
+      borderColor: 'white',
+      backgroundColor: 'rgba(255,255,255,255)',
+    },
+  ];
+  public lineChartLegend = true;
+  public lineChartType = 'line';
+  public lineChartPlugins = [];
+
+
+
   ngOnInit(): void {
     var s1 = document.createElement("script");
     s1.type = "text/javascript";
@@ -149,17 +168,40 @@ export class DefectsComponent implements OnInit {
     if(this.ABB1 == 'ABB') {
       this.service.getABBtop5(this.data).subscribe((res) =>{
         this.results = res.data[0]
+        this.pieChartData =[]
+        for(var i=0;i<this.results.length;i++){
+          this.pieChartData.push(this.results[i].quantite)
+        }
+   
         this.service.getABBdef(this.data).subscribe((res) =>{
           this.results2 = res.data[0]
+          this.lineChartData[0].data = []
+          this.lineChartLabels=[]
+          for(var i=0;i<this.results2.length;i++){
+            this.lineChartData[0].data.push(this.results2[i].quantite)
+            this.lineChartLabels.push(this.results2[i].Nom_Mesure)
+          }
         })
         
     })
     }else {
       this.service2.getHONEYWELLtop5(this.data).subscribe((res) =>{
         this.results = res.data[0]
+        this.pieChartData=[]
+        for(var i=0;i<this.results.length;i++){
+          this.pieChartData.push(this.results[i].quantite)
+        }
+      
         this.service2.getHONEYWELLdef(this.data).subscribe((res) =>{
           this.results2 = res.data[0]
-          console.log(this.results2)
+          this.lineChartData[0].data = []
+          this.lineChartLabels=[]
+          for(var i=0;i<this.results2.length;i++){
+            this.lineChartData[0].data.push(this.results2[i].quantite)
+            this.lineChartLabels.push(this.results2[i].Nom_Mesure)
+          }
+         
+          
         })
     })
     }
