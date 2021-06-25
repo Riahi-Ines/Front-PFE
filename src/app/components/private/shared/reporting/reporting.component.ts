@@ -1,7 +1,9 @@
-import { Component, OnInit , ElementRef, Inject } from '@angular/core';
+import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { AbbService } from '../../../../services/abb.service'
 import { HoneywellService } from '../../../../services/honeywell.service'
+import { ChartType, ChartOptions, ChartDataSets } from 'chart.js';
+import { SingleDataSet, Label, Color, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 @Component({
   selector: 'app-reporting',
   templateUrl: './reporting.component.html',
@@ -14,16 +16,32 @@ export class ReportingComponent implements OnInit {
   public ABB1: any
   public data: any
   public select: any
-  public results2 :any
+  public results2: any
   public select2: any
   public type: any
   public type2: any
-  public results3:any
+  public results3: any
   public results: any
   public results4: any
   public results5: any
   public results6: any
-  constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc,private service: AbbService, private service2: HoneywellService) { }
+  constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: AbbService, private service2: HoneywellService) {
+    monkeyPatchChartJsTooltip();
+    monkeyPatchChartJsLegend();
+  }
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  public pieChartLabels: Label[] = ['Def1', 'Def2', 'Def3', 'Def4', 'Def5'];
+  public pieChartData: SingleDataSet = [];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartPlugins = [];
+  public pieChartColors = [
+    {
+      backgroundColor: ['red', '', 'white', 'blue', 'grey'],
+    },
+  ];
 
   ngOnInit(): void {
     var s1 = document.createElement("script");
@@ -58,7 +76,6 @@ export class ReportingComponent implements OnInit {
 
   }
 
-
   getListeABB() {
     this.data = {
       dateDebut: this.dateDebut,
@@ -72,7 +89,6 @@ export class ReportingComponent implements OnInit {
       this.service2.getHONEYWELL(this.data).subscribe((data) => {
         this.select = data.recordset
       })
-
     }
   }
 
@@ -85,7 +101,6 @@ export class ReportingComponent implements OnInit {
     if (this.ABB1 == 'ABB') {
       this.service.getABBmachine(this.data).subscribe((data) => {
         this.select2 = data.recordset
-
       })
     } else {
       this.service2.getHONEYWELLmachine(this.data).subscribe((data) => {
@@ -95,7 +110,6 @@ export class ReportingComponent implements OnInit {
   }
 
   onChange(abb) {
-
     this.ABB1 = abb
     this.getListeABB()
     this.getmachABB()
@@ -106,15 +120,12 @@ export class ReportingComponent implements OnInit {
   }
 
   dateDev(date) {
-
-
     this.dateDebut = date.replace('T', ' ')
-
   }
-  onChange3 (data) {
+  onChange3(data) {
     this.type2 = data
     this.getFPY()
-}
+  }
 
   dateFin(date) {
 
@@ -122,60 +133,68 @@ export class ReportingComponent implements OnInit {
   }
   getFPY() {
     this.data = {
-     dateDebut :this.dateDebut,
-     dateFint:this.dateFint,
-     TypeTest :this.type,
-    Id_Machine:this.type2
-  
-   }
-   if(this.ABB1 == 'ABB'){
-     this.service.getABBFPY(this.data).subscribe((data) =>{
-      this.results = data.recordsets[0][0].Result
-      this.service.getABBTotalprod(this.data).subscribe((data) => {
-        this.results2 = data.recordset[0].total
-        console.log(this.results2)
-      this.service.getABBfirstprod(this.data).subscribe((data) =>{
-        this.results3 =  data.recordset[0].perpassage
-        this.service.getABBbadprod(this.data).subscribe((data) =>{
-          this.results4 = data.recordset[0].total
-          this.service.getABBtop5(this.data).subscribe((res) =>{
-            this.results5 = res.data[0]
-            this.service.getABBdef(this.data).subscribe((res) =>{
-              this.results6 = res.data[0]
-            })
-            
-        })
-      })
-    
-    })
-  })
-  
-     })
-   }else {
-     this.service2.getHONEYWELLFPY(this.data).subscribe((data) =>{
-           this.results = data.recordsets[0][0].Result
-           this.service2.getHONEYWELLtotal(this.data).subscribe((data) => {
-            this.results2 = data.recordset[0].total
-           this.service2.getHONEYWELLfirst(this.data).subscribe((data) =>{
-            this.results3 =  data.recordset[0].perpassage
-            this.service2.getHONEYWELLbad(this.data).subscribe((data) =>{
-            this.results4 = data.recordset[0].total 
-            this.service2.getHONEYWELLtop5(this.data).subscribe((res) =>{
-              this.results5 = res.data[0]
-              this.service2.getHONEYWELLdef(this.data).subscribe((res) =>{
-                this.results6 = res.data[0]
+      dateDebut: this.dateDebut,
+      dateFint: this.dateFint,
+      TypeTest: this.type,
+      Id_Machine: this.type2
+    }
+    if (this.ABB1 == 'ABB') {
+      this.service.getABBFPY(this.data).subscribe((data) => {
+        this.results = data.recordsets[0][0].Result
+        this.service.getABBTotalprod(this.data).subscribe((data) => {
+          this.results2 = data.recordset[0].total
+          console.log(this.results2)
+          this.service.getABBfirstprod(this.data).subscribe((data) => {
+            this.results3 = data.recordset[0].perpassage
+            this.service.getABBbadprod(this.data).subscribe((data) => {
+              this.results4 = data.recordset[0].total
+              this.service.getABBtop5(this.data).subscribe((res) => {
+                this.results5 = res.data[0]
+                this.pieChartData = []
+                for (var i = 0; i < this.results5.length; i++) {
+                  this.pieChartData.push(this.results5[i].quantite)
+                }
+                this.service.getABBdef(this.data).subscribe((res) => {
+                  this.results6 = res.data[0]
+                })
+
               })
+            })
+
           })
-          })
+        })
+
+      })
+    } else {
+      this.service2.getHONEYWELLFPY(this.data).subscribe((data) => {
+        this.results = data.recordsets[0][0].Result
+        this.service2.getHONEYWELLtotal(this.data).subscribe((data) => {
+          this.results2 = data.recordset[0].total
+          this.service2.getHONEYWELLfirst(this.data).subscribe((data) => {
+            this.results3 = data.recordset[0].perpassage
+            this.service2.getHONEYWELLbad(this.data).subscribe((data) => {
+              this.results4 = data.recordset[0].total
+              this.service2.getHONEYWELLtop5(this.data).subscribe((res) => {
+                this.results5 = res.data[0]
+                this.pieChartData = []
+                for (var i = 0; i < this.results5.length; i++) {
+                  this.pieChartData.push(this.results5[i].quantite)
+                }
+
+                this.service2.getHONEYWELLdef(this.data).subscribe((res) => {
+                  this.results6 = res.data[0]
+                })
+              })
+            })
           })
         })
       })
-  
-   }
-  
+
+    }
+
   }
 
-  print(){
+  print() {
     window.print()
   }
 

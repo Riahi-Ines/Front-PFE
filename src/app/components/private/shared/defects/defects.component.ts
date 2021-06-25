@@ -4,6 +4,8 @@ import { AbbService } from '../../../../services/abb.service'
 import { HoneywellService } from '../../../../services/honeywell.service'
 import { ChartType, ChartOptions,ChartDataSets } from 'chart.js';
 import { SingleDataSet, Label,Color, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
+import { style } from '@angular/animations';
+import { colorSets } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-defects',
@@ -32,25 +34,28 @@ export class DefectsComponent implements OnInit {
    public pieChartOptions: ChartOptions = {
     responsive: true,
   };
-  public pieChartLabels: Label[] = [ 'FPY','rest','dd','zz','aa'];
+  public pieChartLabels: Label[] = [ 'Def1','Def2','Def3','Def4','Def5'];
   public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
   public pieChartColors = [
     {
-      backgroundColor: ['white','red','green','yellow','pink'],
+      backgroundColor: ['','red','grey','blue','white'],
     },
   ];
 
 
   public lineChartData: ChartDataSets[] = [
-    { data: [], label: 'Series A' },
+    { data: [], label: '5 Defects'},
+   
   ];
-  public lineChartLabels: Label[] = [];
+  public lineChartLabels: Label[] = [
+  
+  ];
  
   public lineChartColors: Color[] = [
-    {
+    { 
       borderColor: 'white',
       backgroundColor: 'rgba(255,255,255,255)',
     },

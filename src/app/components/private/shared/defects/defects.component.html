@@ -24,7 +24,8 @@
                                 <div class="form-group">
                                     <label id="dt1">
                                         Date Time From:
-                                        <input type="datetime-local" (change)="dateDev($event.target.value)" id="date" />
+                                        <input type="datetime-local" (change)="dateDev($event.target.value)"
+                                            id="date" />
                                     </label>
                                 </div>
                             </div>
@@ -32,7 +33,8 @@
                                 <div class="form-group">
                                     <label id="dt2">
                                         Date Time To:
-                                        <input type="datetime-local" (change)="dateFin($event.target.value)" id="date" />
+                                        <input type="datetime-local" (change)="dateFin($event.target.value)"
+                                            id="date" />
                                     </label>
                                 </div>
                             </div>
@@ -72,10 +74,10 @@
                                     <label for="exampleInputprod" class="sr-only">Product</label>
                                     <div class="position-relative has-icon-right">
                                         <select class="form-control form-control-rounded" *ngFor="let elemnt of select2"
-                                        (change)="onChange3($event.target.value)">
-                                        <option value="" disabled selected hidden>Choose a Product</option>
-                                        <option>{{elemnt.Id_Machine}}</option>
-                                    </select>
+                                            (change)="onChange3($event.target.value)">
+                                            <option value="" disabled selected hidden>Choose a Product</option>
+                                            <option>{{elemnt.Id_Machine}}</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -91,28 +93,31 @@
                                     <h6 class="m-0 font-weight-bold" style="font-size:16px;">TOP 5 Defects</h6>
                                 </div>
                                 <div style="margin-left: 20px;height: 54px;" *ngFor="let element of results">
-                                    <h4 class="small font-weight-bold">{{element.Nom_Mesure}}&nbsp; &nbsp;&nbsp;{{element.quantite}}</h4>
-                                    <div class="progress"style="margin-top:-10px">
-                                        <div class="progress-bar bg-warning" role="progressbar"   [ngStyle]="{'width' : element.quantite + '%' }" [attr.aria-valuenow]="element.quantite"></div>
+                                    <h4 class="small font-weight-bold">{{element.Nom_Mesure}}&nbsp;
+                                        &nbsp;&nbsp;{{element.quantite}}</h4>
+                                    <div class="progress" style="margin-top:-10px">
+                                        <div class="progress-bar bg-info" role="progressbar"
+                                            [ngStyle]="{'width' : element.quantite + '%' }"
+                                            [attr.aria-valuenow]="element.quantite"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div>
-                                <div class="card shadow mb-4">
+                                <div class="card shadow mb-4" style="height: 370px;">
                                     <!-- Card Header - Dropdown -->
                                     <div
                                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold " style="font-size:16px;">camember defauts</h6>
-
+                                        <h6 class="m-0 font-weight-bold " style="font-size:16px;">TOP5 Defects</h6>
                                     </div>
                                     <!-- Card Body -->
                                     <div class="card-body">
                                         <div class="chart-area">
                                             <div style="display: block;">
-                                                <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-                                                    [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors"
+                                                <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels"
+                                                    [chartType]="pieChartType" [options]="pieChartOptions"
+                                                    [plugins]="pieChartPlugins" [colors]="pieChartColors"
                                                     [legend]="pieChartLegend">
                                                 </canvas>
                                             </div>
@@ -133,57 +138,54 @@
                 </div>
                 <div class="col-xl-12 col-lg-7">
                     <div class="row">
-                      <div class="col-lg-12">
-                        <div class="card">
-                          <div class="card-body">
-                            <h5 class="card-title">Defects List</h5>
-                            <div class="table-responsive table-hover">
-                             <table class="table table-sm">
-                              <thead>
-                                <tr>
-                                  <th scope="col">#</th>
-                                  <th scope="col">Defects</th>
-                                  <th scope="col">Quantity</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr *ngFor="let element of results2 | paginate: { itemsPerPage: 10, currentPage: p };let i = index">
-                                  <th scope="row">{{i+1}}</th>
-                                  <td>{{element.Nom_Mesure}}</td>
-                                  <td>{{element.quantite}}</td>
-                                </tr>
-                               
-                              </tbody>
-                            </table>
-                          </div>
-                          <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                          </div>
-                        </div>
-                      </div>
-                </div>
-                <div class="col-xl-12 col-lg-7">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold " style="font-size:16px;">Defects Evolution
-                            </h6>
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Defects List</h5>
+                                    <div class="table-responsive table-hover">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Defects</th>
+                                                    <th scope="col">Quantity</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let element of results2 | paginate: { itemsPerPage: 10, currentPage: p };let i = index">
+                                                    <th scope="row">{{i+1}}</th>
+                                                    <td>{{element.Nom_Mesure}}</td>
+                                                    <td>{{element.quantite}}</td>
+                                                </tr>
 
-                        </div>
-                        <!-- Card Body -->
-                        <div class="card-body" style="height:300px;">
-                            <div class="chart-area">
-                                <canvas baseChart 
-                                [datasets]="lineChartData"
-                                [labels]="lineChartLabels"
-                                [colors]="lineChartColors"
-                                [legend]="lineChartLegend"
-                                [chartType]="lineChartType"
-                                [plugins]="lineChartPlugins">
-                              </canvas>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div></div>
+                    <div class="col-xl-12 col-lg-7">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold " style="font-size:16px;">Defects Evolution
+                                </h6>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body" style="height:300px;">
+                                <div class="chart-area">
+                                    <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels"
+                                        [colors]="lineChartColors" [legend]="lineChartLegend"
+                                        [chartType]="lineChartType" [plugins]="lineChartPlugins">
+                                    </canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!--End FPY Content-->
                 <!--start overlay-->
                 <div class="overlay toggle-menu"></div>
