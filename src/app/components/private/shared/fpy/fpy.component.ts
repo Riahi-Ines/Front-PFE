@@ -19,6 +19,7 @@ export class FpyComponent implements OnInit {
   public select2:Array<string>
   public type:string
   public type2:string
+  public show:Boolean = false
   constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: AbbService ,private service2: HoneywellService) { 
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
@@ -76,14 +77,28 @@ export class FpyComponent implements OnInit {
   // recherch() {
     
   // }
+  onChange(abb) {
+    this.ABB1 = abb
+    this.show = false
+    this.results ==0
+
+    console.log( this.show,'dddddddddddddddddddddd')
+    
+    this.getListeABB()
+    this.getmachABB()
+  
+  }
   
  onChange2 (data) {
-  console.log(data,'ssss')
       this.type =data
+
 }
 onChange3 (data) {
      this.type2 = data
      this.getFPY()
+   
+
+  
      
 }
   dateDev(date) {
@@ -139,9 +154,11 @@ onChange3 (data) {
 
  }
  if(this.ABB1 == 'ABB'){
+
    this.service.getABBFPY(this.data).subscribe((data) =>{
     this.pieChartData =[]
     this.results = data.recordsets[0][0].Result
+    this.show = true
     this.pieChartData.push(this.results)
     this.pieChartData.push(100-this.results)
     var color = "#"+((1<<24)*Math.random()|0).toString(16);
@@ -150,6 +167,7 @@ onChange3 (data) {
    })
  }else {
    this.service2.getHONEYWELLFPY(this.data).subscribe((data) =>{
+    this.show = true
          this.results = data.recordsets[0][0].Result
          this.pieChartData =[]
          this.pieChartData.push(this.results)
@@ -163,14 +181,7 @@ onChange3 (data) {
 }
 
 
-onChange(abb) {
-  this.ABB1 = abb
-  this.getListeABB()
-  this.getmachABB()
 
-  
-
-}
 
 
 

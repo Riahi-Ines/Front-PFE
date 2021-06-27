@@ -94,7 +94,7 @@
                                         <h6 class="m-0">Total products
                                         </h6>
                                     </div>
-                                    <div id="res">
+                                    <div id="res" *ngIf="show == true">
                                         {{results}}
                                     </div>
                                 </div>
@@ -105,31 +105,48 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="card-header">
+                                        <h6 class="m-0">Total products
+                                        </h6>
+                                    </div>
+                                    <div id="res4" *ngIf="show == true">
+                                        {{results4}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col">
+                            <div class="card shadow mb-4" id="fpy1">
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="card-header">
                                         <h6 class="m-0">First good products
                                         </h6>
                                     </div>
-                                    <div id="res2">
+                                    <div id="res2" *ngIf="show==true">
                                         {{results2}}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
-                            <div class="card shadow mb-4" id="fpy">
+                            <div class="card shadow mb-4" id="fpy2">
                                 <div class="card-body">
                                     <div class="card-header">
                                         <h6 class="m-0">Bad products
                                         </h6>
                                     </div>
-                                    <div id="res3">
+                                    <div id="res3" *ngIf="show==true">
                                         {{results3}}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="chart-area">
-                        <div style="display: block;">
+                        <div style="display: block;" *ngIf="show==true">
                             <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single"
                                 [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
                                 [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"

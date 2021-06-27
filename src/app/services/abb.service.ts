@@ -13,6 +13,7 @@ export class AbbService {
   private totalprodUrl=this.baseURL + "/ABB/totalprodABB"
   private firstprodUrl=this.baseURL + "/ABB/totalfirstpassABB"
   private badprodUrl=this.baseURL + "/ABB/badprodABB"
+  private goodprodUrl=this.baseURL + "/ABB/goodprodABB"
   private top5Url=this.baseURL + "/ABB/listeTopCinqDefautsABB"
   private defUrl=this.baseURL + "/ABB/listeDefautsABB"
 
@@ -38,6 +39,10 @@ export class AbbService {
 
   getABBbadprod(data) {
     return this.http.post<any>(this.badprodUrl,data)
+  }
+
+  getABBgoodprod(data) {
+    return this.http.post<any>(this.goodprodUrl,data)
   }
 
   getABBtop5(data) {

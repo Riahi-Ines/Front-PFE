@@ -16,6 +16,8 @@ export class UpdateUserComponent implements OnInit {
   selectedFile: File = null;
   imageData: string;
   user: any;
+  aa:any
+  bb:any
   id:number;
   public modifyForm: FormGroup;
   constructor(builder: FormBuilder, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
@@ -40,6 +42,9 @@ export class UpdateUserComponent implements OnInit {
     this.id=idUser;
     this.userService.getOneUser(idUser).subscribe(
       res => {
+        this.aa = res.service
+        this.bb = res.post
+        console.log(res,"reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
         this.user = res;
         this.modifyForm.patchValue({
           firstname: this.user.firstname,
@@ -80,7 +85,7 @@ export class UpdateUserComponent implements OnInit {
     fd.append('firstname', this.modifyForm.value.firstname);
     fd.append('lastname', this.modifyForm.value.lastname);
     fd.append('email', this.modifyForm.value.email);
-    fd.append('photo', this.selectedFile, this.selectedFile.name);
+      fd.append('photo', this.selectedFile, this.selectedFile.name);
     fd.append('service', this.modifyForm.value.service);
     fd.append('post', this.modifyForm.value.post);
     this.imageData = null;

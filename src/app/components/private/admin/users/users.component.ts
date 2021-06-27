@@ -90,13 +90,17 @@ export class UsersComponent implements OnInit {
       return (
         u.email.includes(data) ||
         u.firstname.includes(data) ||
-        u.lastname.includes(data) 
+        u.lastname.includes(data) ||
+        u.service.includes(data) ||
+        u.post.includes(data) 
+
         )
     }
     )
 
   }
-  onupdate(){
+  onupdate(user){
+    console.log(user)
 this.dialog.open(UpdateUserComponent)
   }
 }

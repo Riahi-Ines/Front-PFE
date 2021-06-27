@@ -87,23 +87,26 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-hover table-striped">
-                                <table class="table table-hover table-striped">
+                            <table class="table table-hover table-striped" >
+                                <table class="table table-hover table-striped" >
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <strong>FPY:</strong> &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<strong> {{results}}%</strong>
+                                        <tr> 
+                                            <td >
+                                                <strong>FPY:</strong> &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<strong *ngIf="show == true"> {{results}}%</strong>
                                             </td>
                                             <td>
-                                                <strong style="margin-left: -100px;">Total Products:</strong>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<strong>{{results2}}</strong>
+                                                <strong style="margin-left: -100px;">Total Products:</strong>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<strong *ngIf="show == true">{{results2}}</strong>
+                                            </td>
+                                            <td>
+                                                <strong >Good Products:</strong>&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<strong *ngIf="show == true">{{results7}}</strong>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <strong>Good Products passed on the first try</strong>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<strong>{{results3}}</strong>
+                                                <strong>Good Products passed on the first try</strong>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<strong *ngIf="show == true">{{results3}} &nbsp;&nbsp;&nbsp; &nbsp;</strong>
                                             </td>
                                             <td>
-                                                <strong style="margin-left: -100px;">Bad Products</strong>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<strong>{{results4}}</strong>
+                                                <strong style="margin-left: -100px;">Bad Products</strong>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<strong *ngIf="show == true">{{results4}}</strong>
                                             </td>
                                         </tr>
 
@@ -112,7 +115,7 @@
                             </table>
                             <!-- Content Column -->
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="show==true">
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-body">
@@ -150,7 +153,7 @@
                                     <!-- Card Body -->
                                     <div class="card-body">
                                         <div class="chart-area">
-                                            <div style="display: block;">
+                                            <div style="display: block;" *ngIf="show==true">
                                                 <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
                                                     [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors"
                                                     [legend]="pieChartLegend">
@@ -177,7 +180,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="show==true">
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-body">

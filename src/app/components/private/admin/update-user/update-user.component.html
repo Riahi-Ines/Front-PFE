@@ -61,9 +61,10 @@
                     </div>
                     <div class="row mt-3 g-2">
                         <div class="col-md-6">
-                            <div class="inputs px-4"> <span class="text-uppercase">Service</span> <select
-                                    class="form-control form-control-sm" formControlName="service" id="service">
-                                    <option value="" disabled selected hidden>Choose Service</option>
+                            <div class="inputs px-4"> <span class="text-uppercase">Service</span> 
+                                <select
+                                    class="form-control form-control-sm" formControlName="service" id="service" [value]='aa'>
+                                    <option value="" disabled selected hidden [selected]="service">Choose Service</option>
                                     <option value="Production">Production</option>
                                     <option value="Maintenance">Maintenance</option>
                                     <option value="Qualité">Qualité</option>
@@ -72,10 +73,11 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="inputs px-4"> <span class="text-uppercase">post</span> <select
-                                    class="form-control form-control-sm" formControlName="post">
-                                    <option value="" disabled selected hidden>Choose Post</option>
-                                    <option value="Directeur">Directeur</option>
+                            <div class="inputs px-4"> <span class="text-uppercase">post</span>
+                                 <select
+                                    class="form-control form-control-sm" formControlName="post" [value]='bb'>
+                                    <option value="" disabled selected hidden [selected]="post">Choose Post</option>
+                                    <option value="Director">Director</option>
                                     <option value="Responsable">Responsable</option>
                                     <option value="Ingénieur">Ingénieur</option>
                                     <option value="Technicien">Technicien</option>
@@ -88,7 +90,7 @@
                         <label class="col-lg-3 col-form-label form-control-label"></label>
                         <div class="col-lg-9">
                             <input type="reset" class="btn btn-danger" value="Cancel">
-                            <input type="submit" [disabled]="modifyForm.invalid" class="btn btn-info"
+                            <input type="submit"  class="btn btn-info"
                                 value="Save Changes">
                         </div>
                     </div>

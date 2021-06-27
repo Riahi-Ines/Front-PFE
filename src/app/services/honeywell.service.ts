@@ -13,6 +13,7 @@ export class HoneywellService {
   private HONEYWELLtotalprod=this.baseURL + "/HONEYWELL/totalprodHONEYWELL"
   private HONEYWELLfirst=this.baseURL + "/HONEYWELL/totalfirstpassHONEYWELL"
   private HONEYWELLbad=this.baseURL + "/HONEYWELL/badprodHONEYWELL"
+  private HONEYWELLgood=this.baseURL + "/HONEYWELL/goodprodHONEYWELL"
   private top5Url=this.baseURL + "/HONEYWELL/listeTopCinqDefautsHONEYWELL"
   private defUrl=this.baseURL + "/HONEYWELL/listeDefautsHONEYWELL"
 
@@ -38,6 +39,9 @@ export class HoneywellService {
 
   getHONEYWELLbad(data) {
     return this.http.post<any>(this.HONEYWELLbad,data)
+  }
+  getHONEYWELLgood(data) {
+    return this.http.post<any>(this.HONEYWELLgood,data)
   }
 
   getHONEYWELLtop5(data) {

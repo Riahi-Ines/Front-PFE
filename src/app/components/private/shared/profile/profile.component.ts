@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
       photo: new FormControl("", [Validators.required,]),
       service: new FormControl("", [Validators.required,]),
       post: new FormControl("", [Validators.required,]),
-      password: new FormControl("", [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>"\'`\\;:\{\\\}\\\[\\\]\\\|\\\+\\\-\\\=\\\_\\\)\\\(\\\)\\\`\\\/\\\\\\]])[A-Za-z0-9\d$@].{1,}')]),
+      password: new FormControl("", [ Validators.minLength(8), Validators.pattern('(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>"\'`\\;:\{\\\}\\\[\\\]\\\|\\\+\\\-\\\=\\\_\\\)\\\(\\\)\\\`\\\/\\\\\\]])[A-Za-z0-9\d$@].{1,}')]),
       repassword: new FormControl("", [Validators.required,]),
     }
     this.modifyForm = builder.group(modifyformscontrol);
@@ -95,7 +95,7 @@ export class ProfileComponent implements OnInit {
           photo: this.user.photo,
           service:this.user.service,
           post:this.user.post,
-          password:this.user.password,
+         
         })
       }
     )

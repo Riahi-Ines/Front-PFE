@@ -34,6 +34,7 @@ export class DefectsComponent implements OnInit {
    public pieChartOptions: ChartOptions = {
     responsive: true,
   };
+  public show :Boolean = false
   public pieChartLabels: Label[] = [ 'Def1','Def2','Def3','Def4','Def5'];
   public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
@@ -135,7 +136,7 @@ export class DefectsComponent implements OnInit {
   }
 
   onChange(abb) {
-
+this.show = false
     this.ABB1 = abb
     this.getListeABB()
     this.getmachABB()
@@ -172,6 +173,7 @@ export class DefectsComponent implements OnInit {
     }
     if(this.ABB1 == 'ABB') {
       this.service.getABBtop5(this.data).subscribe((res) =>{
+        this.show = true
         this.results = res.data[0]
         this.pieChartData =[]
         for(var i=0;i<this.results.length;i++){
@@ -179,6 +181,7 @@ export class DefectsComponent implements OnInit {
         }
    
         this.service.getABBdef(this.data).subscribe((res) =>{
+          this.show = true
           this.results2 = res.data[0]
           this.lineChartData[0].data = []
           this.lineChartLabels=[]
@@ -191,6 +194,7 @@ export class DefectsComponent implements OnInit {
     })
     }else {
       this.service2.getHONEYWELLtop5(this.data).subscribe((res) =>{
+        this.show =true
         this.results = res.data[0]
         this.pieChartData=[]
         for(var i=0;i<this.results.length;i++){
@@ -198,6 +202,7 @@ export class DefectsComponent implements OnInit {
         }
       
         this.service2.getHONEYWELLdef(this.data).subscribe((res) =>{
+          this.show = true
           this.results2 = res.data[0]
           this.lineChartData[0].data = []
           this.lineChartLabels=[]

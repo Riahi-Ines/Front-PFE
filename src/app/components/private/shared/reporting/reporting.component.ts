@@ -23,8 +23,10 @@ export class ReportingComponent implements OnInit {
   public results3: any
   public results: any
   public results4: any
+  public show :Boolean = false
   public results5: any
   public results6: any
+  public results7: any
   constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: AbbService, private service2: HoneywellService) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
@@ -111,6 +113,7 @@ export class ReportingComponent implements OnInit {
 
   onChange(abb) {
     this.ABB1 = abb
+    this.show = false
     this.getListeABB()
     this.getmachABB()
   }
@@ -140,12 +143,16 @@ export class ReportingComponent implements OnInit {
     }
     if (this.ABB1 == 'ABB') {
       this.service.getABBFPY(this.data).subscribe((data) => {
+        this.show = true
         this.results = data.recordsets[0][0].Result
         this.service.getABBTotalprod(this.data).subscribe((data) => {
           this.results2 = data.recordset[0].total
           console.log(this.results2)
           this.service.getABBfirstprod(this.data).subscribe((data) => {
             this.results3 = data.recordset[0].perpassage
+            this.service.getABBgoodprod(this.data).subscribe((data) => {
+              this.results7 = data.recordset[0].total
+              console.log(this.results7)
             this.service.getABBbadprod(this.data).subscribe((data) => {
               this.results4 = data.recordset[0].total
               this.service.getABBtop5(this.data).subscribe((res) => {
@@ -157,7 +164,7 @@ export class ReportingComponent implements OnInit {
                 this.service.getABBdef(this.data).subscribe((res) => {
                   this.results6 = res.data[0]
                 })
-
+              })
               })
             })
 
@@ -167,9 +174,12 @@ export class ReportingComponent implements OnInit {
       })
     } else {
       this.service2.getHONEYWELLFPY(this.data).subscribe((data) => {
+        this.show = true
         this.results = data.recordsets[0][0].Result
         this.service2.getHONEYWELLtotal(this.data).subscribe((data) => {
           this.results2 = data.recordset[0].total
+          this.service2.getHONEYWELLgood(this.data).subscribe((data) => {
+            this.results7 = data.recordset[0].total
           this.service2.getHONEYWELLfirst(this.data).subscribe((data) => {
             this.results3 = data.recordset[0].perpassage
             this.service2.getHONEYWELLbad(this.data).subscribe((data) => {
@@ -185,6 +195,7 @@ export class ReportingComponent implements OnInit {
                   this.results6 = res.data[0]
                 })
               })
+            })
             })
           })
         })

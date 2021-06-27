@@ -15,6 +15,7 @@ export class ProductsComponent implements OnInit {
   public dateDebut: any
   public dateFint: any
   public ABB1: any
+  public show:Boolean = false
   public data: any
   public select: any
   public results2 :any
@@ -22,6 +23,7 @@ export class ProductsComponent implements OnInit {
   public type: any
   public type2: any
   public results3 :any 
+  public results4 :any 
   public results:any
   public fpyForm: FormGroup;
   public single =[];
@@ -37,7 +39,7 @@ export class ProductsComponent implements OnInit {
   showYAxisLabel = true;
   yAxisLabel = 'Products Number';
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#0000ff', '#A10A28', '#C7B42C', '#5AA454']
   };
 
   constructor(builder: FormBuilder, private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: AbbService, private service2: HoneywellService) {
@@ -124,7 +126,7 @@ export class ProductsComponent implements OnInit {
   }
 
   onChange(abb) {
-
+this.show = false
     this.ABB1 = abb
     this.getListeABB()
     this.getmachABB()
@@ -148,14 +150,22 @@ export class ProductsComponent implements OnInit {
     }
     if (this.ABB1 == 'ABB') {
         this.service.getABBTotalprod(this.data).subscribe((data) => {
+          this.show =true
         this.results = data.recordset[0].total
         this.service.getABBfirstprod(this.data).subscribe((data) =>{
           this.results2 =  data.recordset[0].perpassage
+          this.service.getABBgoodprod(this.data).subscribe((data) =>{
+            this.results4 =  data.recordset[0].total
+            console.log(this.results4)
           this.service.getABBbadprod(this.data).subscribe((data) =>{
             this.results3 = data.recordset[0].total
           this.single =[{
             name:"TotalProd",
             value:this.results
+          },
+          {
+            name:"GoodProd",
+            value:this.results4
           },
           {
             name:"FirstProd",
@@ -165,9 +175,12 @@ export class ProductsComponent implements OnInit {
             name:"BadProd",
             value:this.results3
           }
+          
         ]
         console.log(this.single)
           })
+          
+        })
         })
       
       })
@@ -176,14 +189,21 @@ export class ProductsComponent implements OnInit {
       
     } else{
       this.service2.getHONEYWELLtotal(this.data).subscribe((data) => {
+        this.show =true
       this.results = data.recordset[0].total
       this.service2.getHONEYWELLfirst(this.data).subscribe((data) =>{
         this.results2 =  data.recordset[0].perpassage
+        this.service2.getHONEYWELLgood(this.data).subscribe((data) =>{
+          this.results4 =  data.recordset[0].total
         this.service2.getHONEYWELLbad(this.data).subscribe((data) =>{
         this.results3 = data.recordset[0].total
         this.single =[{
           name:"TotalProd",
           value:this.results
+        },
+        {
+          name:"GoodProd",
+          value:this.results4
         },
         {
           name:"FirstProd",
@@ -197,7 +217,7 @@ export class ProductsComponent implements OnInit {
       console.log(this.single)
         })
       })
-    
+    })
       
     
       
