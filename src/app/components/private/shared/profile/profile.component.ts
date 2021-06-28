@@ -146,7 +146,7 @@ export class ProfileComponent implements OnInit {
     this.userService.updateUser(this.id,fd).subscribe(
       res => {
         this.toastr.warning(res.message);
-        this.router.navigate(['/profile']);
+       this.router.navigate(['/users']);
       },
       err => {
         this.toastr.error(err);
