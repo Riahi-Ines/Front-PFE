@@ -1,7 +1,9 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-
-import * as $ from 'jquery';
+import { FormControl, FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import {ResetService} from '../../../services/reset.service'
 
 @Component({
   selector: 'app-reset',
@@ -9,8 +11,18 @@ import * as $ from 'jquery';
   styleUrls: ['./reset.component.css']
 })
 export class ResetComponent implements OnInit {
-
-  constructor(private elementRef: ElementRef, @Inject(DOCUMENT) private doc) { }
+  public loginForm: FormGroup;
+  public errorMessage: String = "";
+  constructor(builder: FormBuilder,private elementRef: ElementRef,
+    private _router: Router, @Inject(DOCUMENT) private doc , private service:ResetService,
+  private toastr: ToastrService ) {
+    let loginformscontrol = {
+      chek: new FormControl("", [Validators.required,]),
+      email: new FormControl(),
+  
+    }
+    this.loginForm = builder.group(loginformscontrol);
+   }
 
   ngOnInit(): void {
 
@@ -44,6 +56,25 @@ export class ResetComponent implements OnInit {
     s6.src = "assets/js/app-script.js";
     this.elementRef.nativeElement.appendChild(s6);
 
+  }
+
+
+
+
+
+  ResetPassword() {
+    let data = this.loginForm.value;
+    this.service.resetPassword({email:data.email}).subscribe(
+      (res) => {
+       
+        this.toastr.success(res.message);
+        this._router.navigateByUrl('/login');
+      },
+      err=>{
+        this.toastr.error('Email not found');
+      }
+     
+    )
   }
 
 }

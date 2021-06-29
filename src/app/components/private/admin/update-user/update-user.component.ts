@@ -66,7 +66,6 @@ export class UpdateUserComponent implements OnInit {
   get photo() { return this.modifyForm.get('photo') }
   get service() { return this.modifyForm.get('service') }
   get post() { return this.modifyForm.get('post') }
-  
 
   onFileSelect(event) {
     this.selectedFile = <File>event.target.files[0]
@@ -85,7 +84,7 @@ export class UpdateUserComponent implements OnInit {
     fd.append('firstname', this.modifyForm.value.firstname);
     fd.append('lastname', this.modifyForm.value.lastname);
     fd.append('email', this.modifyForm.value.email);
-      fd.append('photo', this.selectedFile, this.selectedFile.name);
+    fd.append('photo', this.selectedFile, this.selectedFile.name);
     fd.append('service', this.modifyForm.value.service);
     fd.append('post', this.modifyForm.value.post);
     this.imageData = null;
